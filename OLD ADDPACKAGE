@@ -1,0 +1,9 @@
+$('#package_limit').change(function() {
+        var prices = '<label class="col-sm-12">Prices per Person</label><div class="col-md-8">';
+
+        for(var i=1; i<=$(this).val(); i ++) {
+          prices += '<div class="input-group"><span class="input-group-addon">₱</span><input type="text" class="form-control" required name="price_for_' + i + '" placeholder="Price for ' + i + ' (per person)"> </div><br>';
+        }
+        prices += '</div>';
+        $('.pricesdiv').html(prices);
+    })
