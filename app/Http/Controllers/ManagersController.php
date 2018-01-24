@@ -341,9 +341,8 @@ class ManagersController extends Controller
 
     public function manageCrew()
     {
-        $c = SuperAdmin::all();  
+        $c = Crew::all();  
 
-        dd($c);
 
         return view('wsadmin.managecrew')->with('m',$c);
     }
