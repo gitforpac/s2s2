@@ -8,7 +8,7 @@
 					<img class="img-responsive user-avatar" src="/storage/user_avatars/{{$data->avatar}}">
 				</span>
 				@if(Auth::guard('user')->check())
-				<div class="overlay">
+				<div>
 					<form method="post" action="/changeavatar" id="avatarform" enctype="multipart/form-data">
 						{{csrf_field()}}
 						<div class="col cb text-white user-u-b">
@@ -28,12 +28,12 @@
 		</div>
 		<div class="col-md-8" style="padding-left: 30px;">
 			<div class="user-info">
-				<h5 class="user-name">I'm {{$data->name}}</h5>
+				<h5 class="user-name">I'm {{Auth::guard('user')->user()->user_fullname}}</h5>
 				<strong class="user-info-location">From Cebu, Philippines Joined June 2017</strong>
 			</div>
 			<div class="user-about-info">
 				<h5 class="pd-h">About User</h5>
-				qweqweqweqwewqeqeqwewq
+				<p>{{$data->user_about}}</p>
 			</div>
 		</div>
 	</div>

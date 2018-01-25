@@ -8,7 +8,7 @@
           <a class="nav-link np active" href="/adventurer/{{Auth::guard('user')->id()}}/edit">Edit Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link np" href="#">Reviews</a>
+          <a class="nav-link np" href="/user-reviews">Reviews</a>
         </li>
         <li class="nav-item">
           <a class="nav-link np active" href="/changepassword">Change Password</a>

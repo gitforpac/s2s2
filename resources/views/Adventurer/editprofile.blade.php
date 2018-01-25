@@ -8,7 +8,7 @@
           <a class="nav-link np active" href="/adventurer/{{Auth::guard('user')->id()}}/edit">Edit Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link np" href="#">Reviews</a>
+          <a class="nav-link np" href="/user-reviews">Reviews</a>
         </li>
         <li class="nav-item">
           <a class="nav-link np" href="/changepassword">Change Password</a>
@@ -29,7 +29,7 @@
             <div class="message-status text-center">
             </div>
             <div id="edit-profile-body" style="display: none;">
-            <form id="user-profile-form">
+            <form class="form-group">
               <div class="row row-condensed">
                   <label class="text-right col-sm-3" for="user_first_name">
                     First Name
@@ -72,9 +72,8 @@
         </label>
         <div class="col-sm-9">
           
-        <fieldset>
-          <legend>Birthday</legend>
-          <div class="select">
+  <fieldset>
+          <div class="select pt-1">
             <select aria-label="Month" id="user_birthdate_month" name="user[birthdate(2i)]">
               <option value="">Month</option>
               <option value="January">January</option>
@@ -92,7 +91,7 @@
             </select>
 
           </div>
-          <div class="select">
+          <div class="select pt-1">
             <select aria-label="Day" id="user_birthdate_day" name="user[birthdate(3i)]">
 <option value="">Day</option>
 
@@ -102,7 +101,7 @@
 </select>
 
           </div>
-          <div class="select">
+          <div class="select pt-1">
             <select aria-label="Year" id="user_birthdate_year" name="user[birthdate(1i)]">
               <option value="">Year</option>
               <?php for($cnt=1917;$cnt<2000;$cnt++){ ?>
@@ -111,7 +110,7 @@
             </select>
 
           </div>
-        </fieldset>
+  </fieldset>
 
           <div class="text-muted space-top-1">The magical day you were dropped from the sky by a stork. We use this data for analysis and never share it with other users.</div>
         </div>
@@ -123,7 +122,7 @@
         </label>
         <div class="col-sm-9"> 
         <input id="user_email" name="user[email]" size="30" type="text" value="" />
-          <div class="text-muted space-top-1">We won’t share your private email address with other users. <a href="/help/article/694" target="blank">Learn more</a>.</div>
+          <div class="text-muted space-top-1">We won’t share your private email address with other users.</div>
         </div>
       </div>
 

@@ -124,6 +124,8 @@ Route::resource('adventurer','AdventurerController');
 Route::view('/dashboard', 'Adventurer.dashboard',['title' => 'Dashboard']);
 Route::view('/trips', 'Adventurer.trips',['title' => 'Trips']);
 Route::view('/changepassword', 'Adventurer.changepassword', ['title' => 'Change Password']);
+
+Route::view('/user-reviews', 'Adventurer.reviews', ['title' => 'Reviews']);
 Route::post('/updatepassword/{id}', 'AdventurerController@changePassword');
 Route::post('/writecomment/{pid}/{uid}', 'AdventurerController@comment');
 Route::get('/myadventures/', 'BookingsController@showUserBookings');
