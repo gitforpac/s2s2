@@ -20,7 +20,8 @@ type: 'POST',
 cache: false,
 data: {client_count: adventurercount},
 success: function(html){
-	$(document).find('.snackbar-container').fadeOut(500);
+	$(document).find('.snackbar-container').animate({
+    opacity: 0,});
 $('input[name="total_payment"]').val(html.total);
 var total = html.total;
 $('.total .p-price').html('₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'<span class="sb-currency">PHP</span>');
