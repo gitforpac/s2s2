@@ -103,10 +103,6 @@
             </div>
             @endforeach
             <div class="detail-wrap">
-               <h5 class="pd-h">Itinerary</h5>
-               {!!$pagedata['package']->itinerary!!}
-            </div>
-            <div class="detail-wrap">
               <div class="reviews" id="comment-container">
                 <h5 class="pd-h">Reviews</h5>
                 @if($pagedata['comments']->isEmpty())
@@ -129,7 +125,12 @@
                 <div class="comment-wrapper" id="comment-box">
                   <div class="comment" style="text-align: right;">
                       <textarea name="comment" class="form-control" placeholder="Write your review..."></textarea>
-                      <button class="btn review-btn" style="margin-top: 10px;" id="commentbtn">Post Review</button>
+                      @if(Auth::guard('user')->check())
+                        <button class="btn review-btn" style="margin-top: 10px;" id="commentbtn">Post Review</button>
+                      @else                       
+                      	<a href="javascript:void(0)" class="btn review-btn" style="margin-top: 10px;" class="book-btn" data-toggle="modal" data-target="#login-form">Post Review</a>
+                      @endif
+                      
                   </div>
                 </div>
               </div>
@@ -194,7 +195,7 @@
       </div>
     </div>
     <div class="tab-pane fade" id="itinerary" role="tabpanel" aria-labelledby="itinerary-tab">
-      {{$pagedata['package']->itinerary}}
+    	<div class="detail-wrap">{!!$pagedata['package']->itinerary!!}</div> 
     </div>
   </div>
 </div>
