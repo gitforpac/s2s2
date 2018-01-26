@@ -6,10 +6,13 @@
       <a href="/adventures" class="nav-link">Adventures</a>
     </li>
     <li class="navbar-item">
-      <a href="/packages" class="nav-link">About us</a>
+      <a href="/theteam" class="nav-link">CrewMembers</a>
     </li>
     <li class="navbar-item">
-      <a href="/packages" class="nav-link">Contact us</a>
+      <a href="/about-us" class="nav-link">About us</a>
+    </li>
+    <li class="navbar-item">
+      <a href="/contact-us" class="nav-link">Contact us</a>
     </li>
     @if(Auth::guard('user')->check())
      <li class="nav-item dropdown">

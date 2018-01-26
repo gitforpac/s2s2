@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Booking;
 use App\Schedule;
 use App\Package;
@@ -19,6 +20,11 @@ class PackagesController extends Controller
      */
     public function index(Request $request)
     {
+        if(!Session::has('transactionsession')) {
+            $request->session()->put('transactionsession', $this->tcGenerate());
+        }
+        
+
         $title = 'Adventures';
         $avd = Schedule::query();
 
@@ -132,9 +138,24 @@ class PackagesController extends Controller
             'images' => $images,
             'comments' => $comments,
             'content' => $content,
-            'prices' =>  $prices
+            'prices' =>  $prices,
         );
         return view('package.package')->with('pagedata',$data); 
     }
+
+    private function tcGenerate()
+    {
+        $seed = str_split('abcdefghijklmnopqrstuvwxyz'
+                 .'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                 .'0123456789');
+
+        shuffle($seed);
+        $rand = '';
+        foreach (array_rand($seed, 6) as $k) $rand .= $seed[$k];
+
+        return $rand;
+    }
+
+    
 
 }

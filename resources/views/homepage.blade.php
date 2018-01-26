@@ -20,8 +20,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
     <script type="text/javascript">
+
         Pace.on('done', function() {
           setTimeout(function(){ 
             $('.loader-overlay').fadeOut();
@@ -187,6 +188,9 @@
     </section>
   @include('inc.registerform')
   @include('inc.loginform')
+   @if(Auth::guard('admin')->check())
+   <a href="/crew/dashboard" class="btn btn-primary btd"><i class="fa fa-arrow-left" style="color: #fff;"></i> Back to Dashboard</a>
+   @endif
   </div>
   @include('inc.footer')
     <script type="text/javascript" src="/js/snackbar.min.js"></script>

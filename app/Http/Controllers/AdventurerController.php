@@ -197,4 +197,11 @@ class AdventurerController extends Controller
         return view('Adventurer.myprofile')->with('data',$u);
     }
 
+    public function editprofileView()
+    {
+         $u = User::find(Auth::guard('user')->id());
+
+         return view('Adventurer.editprofile')->with('user',$u);
+    }
+
 }

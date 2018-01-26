@@ -4,7 +4,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/img/da.jpg" class="user-image" alt="User Image">
+          <img src="/storage/crew_avatars/{{Auth::guard('admin')->user()->avatar}}" class="user-image" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{Auth::guard('admin')->user()->name}}</p>

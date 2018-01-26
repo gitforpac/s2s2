@@ -181,13 +181,18 @@
           </li>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/img/da.jpg" class="user-image" alt="User Image">
+              <img src="/storage/crew_avatars/{{Auth::guard('admin')->user()->avatar}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{Auth::guard('admin')->user()->name}}</span>
             </a>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a href="{{ route('logout') }}" class="dropdown-item" 
+                  onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();" data-toggle="control-sidebar">Logout &nbsp;<i class="fa fa-gears"></i></a>
+            <form id="logout-form" action="/logout" method="POST" style="display: none;">
+            {{ csrf_field() }}
+            </form>
           </li>
         </ul>
       </div>

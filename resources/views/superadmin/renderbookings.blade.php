@@ -5,7 +5,7 @@
 @else
 @foreach($data['schedules'] as $s)
 <div class="box-header">
-  <h3 class="box-title">Booking(s) for {{ date('M d, Y, D', strtotime($s->date)) }}</h3>
+  <h3 class="box-title"><strong>Booking(s) for {{ date('M d, Y, D', strtotime($s->date)) }}</strong></h3>
 </div>
 @if($data['bookings']->isEmpty())
 <div>No Bookings Found</div>
@@ -26,7 +26,7 @@
         </thead>
         <tbody>
           @foreach($data['bookings'] as $bk)
-           @if($bk->date == $s->date)
+           @if($bk->date == $s->date )
             <tr>
               <th scope="row">{{$loop->iteration}}</th>
               <td>{{$bk->name}}</td>

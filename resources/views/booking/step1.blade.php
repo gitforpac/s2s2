@@ -90,7 +90,7 @@
 					
 				</div>
 			</div>
-			<input type="submit" name="book" value="Book this Adventure" class="btn bg-sb text-white" style="margin-top: 50px;float: right;margin-right: 40px;"> 
+			<input type="submit" name="book" id="book-btn" value="Book this Adventure" class="btn bg-sb text-white" style="margin-top: 50px;float: right;margin-right: 40px;"> 
 			</form>
 	</div>
 		<div class="col" style="background-color: #f1f2ef; height: 240px; margin-top: 10px;">
@@ -99,25 +99,22 @@
              	<h5 class="loc-header">Talamban </h5> 
               	<br>
               	<h5 class="sd">Date: {{date('M d, Y, D', strtotime($pagedata['schedule']->date))}}</h5>
-              	<div class="row">
-	              	<div class="col" >
-	              		<div class="row">
-	              			<div class="col-md-6">
-			              		<span class="adventurers">Adventurer:</span>
-			              	</div>
-			              	<div class="col-md-6">
-			              		<span class="numag">x1 <i class="fa fa-users"></i></span>
-			              	</div>
-	              		</div>
+
+			             		<span class="adventurers" >Adventurer:</span>
+
+
+			              		<span class="numag" style="display:inline-block;position: relative !important;top: 1px;left: 3px; font-size: 16px;">x1 <i class="fa fa-users"></i></span>
+
+			              		<div style="font-size: 16px;margin-top: 10px;"><small>20% of Total Payment is the booking fee</small>*</div>
+
 	              		
-	              	</div>
-	              	<div class="col">
-	              	</div>        
-				</div>
+
+       
+
 			</div>
 			<div class="total">
-				<h5 class="tp"> Total Payment:</h5>
-              	<h5 class="p-price"> ₱ {{number_format($pagedata['prices']->price_per)}}<span class="sb-currency">PHP</span></h5> 
+				<h5 class="tp"> Booking Payment:</h5>
+              	<h5 class="p-price"> ₱ {{number_format($pagedata['prices']->price_per*0.20,0)}}.00<span class="sb-currency">PHP</span></h5> 
           	</div>
 		</div>
 	</div>
@@ -130,7 +127,6 @@
 	var adventurercount = 1;
 	var pid = '{{$pagedata['package']->id}}';
 	var total = $('input[name="total_payment"]').val();
-	var c = '<span class="loadp text-center"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></span>';
 </script>
 <script type="text/javascript" src="/js/s1.js"></script>
 

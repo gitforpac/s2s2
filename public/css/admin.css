@@ -1,5 +1,25 @@
 
 
+.mpw {
+    display: inline-block;
+    margin-right: 8px;
+}
+table td img {
+    height: 120px;
+    width: 120px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pb {
+    border-radius: 100%;
+}
+
+.img-a {
+    width: 100px;
+    height: 100px;
+}
+
 .ur {
     background-color: #dee5e8;
 }

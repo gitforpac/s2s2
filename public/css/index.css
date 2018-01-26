@@ -1,7 +1,12 @@
 
 
 
-
+.btd {
+	position: fixed;
+	right: 55px;
+	bottom: 60px;
+	z-index: 2000;
+}
 
 * {
 	box-sizing: border-box;

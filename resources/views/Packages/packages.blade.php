@@ -25,10 +25,8 @@
           <div class="card-body">
             <a href="/adventure/{{$p->id}}"><h5 class="card-title adv-name">{{$p->name}}</h5></a>
              <span class="difficulty-s">From ₱{{number_format($p->price_per)}} </span> per person<br>
-            <hr>
             <i class="fa fa-bandcamp" ></i> <span class="difficulty-s"> {{$p->difficulty}}</span> <br>
             <i class="fa fa-compass" ></i> <span class="difficulty-s">{{$p->location}}</span> 
-          <a href="/adventure/{{$p->pid}}" class="btn-sm btn-view-adv">View This Adventure</a>
           </div>
         </div>
       </div>

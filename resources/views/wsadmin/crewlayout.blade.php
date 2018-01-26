@@ -35,6 +35,8 @@
 
    <script type="text/javascript">
      window.Laravel = {'csrfToken': '{{csrf_token()}}'}
+
+    
    </script>
 </head>
 

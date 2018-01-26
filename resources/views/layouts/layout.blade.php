@@ -49,6 +49,7 @@
     @include('inc.registerform')
     @include('inc.loginform')
     </div>
+    <a class="btn btn-primary btd">Back to Dashboard</a>
     <script type="text/javascript" src="/js/snackbar.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>

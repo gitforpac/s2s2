@@ -27,7 +27,7 @@ $(document).ready(function(){
 // add inclusion
 $('#add_includedbtn').click(function(e){
 Pace.restart();
- e.preventDefault();
+e.preventDefault();
 $('#add_includedbtn').prop('disabled',true);
 var included = $('#included').val();
 if(included) {
@@ -547,6 +547,7 @@ $('#edit-price-form').ajaxForm({
         }
     },
     success: function(data) {
+    	$('#edit-price-modal').modal('toggle');
     	$.notify(" Updated Successfully", "success");
     	$('#prices-table').html(data);
     },

@@ -27,9 +27,9 @@
         {{ csrf_field()}} 
         <div class="error-box-login">
         </div>
-        <div class="form-icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>  
+        <div class="form-icon2"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>  
         <input type="email" name="email" id="email" class="form-control" placeholder="Email" autofocus required="" />
-        <div class="form-icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+        <div class="form-icon2"><i class="fa fa-lock" aria-hidden="true"></i></div>
         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="" />
          
         <div class="form-check">
@@ -38,7 +38,7 @@
         <small>Remember Me</small>
         </label>
         <button type="submit" class="btn btn-block mybtn1" id="loginbtn" style="margin-top: 5px;">Login</button>
-        <a style="color: #00305B;" href="#register-form" data-toggle="modal" data-dismiss="modal" class="btn btn-block mybtn1">Register</a>
+        <a style="color: #00305B;" href="#register-form" data-toggle="modal" data-dismiss="modal" class="btn btn-block mybtn1">Don't have an account? Register</a>
       </div>
       </div>  
 </form>

@@ -80,10 +80,7 @@ If you would like us to keep you on file, please email us at cebu@pac.com!</p>
             <legend><span class="fa fa-globe"></span> Where's our headquarters?</legend>
             <address>
                 <strong>Philippine Adventure Consultants</strong><br>
-                Talamban<br>
-                Cebu City Cebu 6000<br>
-                
-                (+032) 344-5934
+                {{$c->contactdetails}}
             </address>
             </form>
         </div>

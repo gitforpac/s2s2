@@ -4,10 +4,10 @@
 
 
 $(document).on('change','#adultguest',function(){
-	 Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Processing Request...', pos: 'bottom-right' });
+Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Processing Request...', pos: 'bottom-right' });
 adventurercount = parseInt($(this).val());
-$('.total .p-price').html(c);
-
+$("#book-btn").prop('disabled', true);
+$('.total .p-price').html('');
 $.ajaxSetup({
 headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -20,12 +20,13 @@ type: 'POST',
 cache: false,
 data: {client_count: adventurercount},
 success: function(html){
-	$(document).find('.snackbar-container').animate({
-    opacity: 0,});
+$("#book-btn").prop('disabled', false);
+$(document).find('.snackbar-container').animate({
+opacity: 0,});
 $('input[name="total_payment"]').val(html.total);
 var total = html.total;
-$('.total .p-price').html('₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'<span class="sb-currency">PHP</span>');
-$('.numag').html(html.per+'PHP x '+adventurercount+'person(s) <i class="fa fa-users"></i>');
+$('.total .p-price').html('₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'.00<span class="sb-currency">PHP</span>');
+$('.numag').html(html.per+' PHP x '+adventurercount+' person(s) <i class="fa fa-users"></i>');
 $('input[name="guest"]').val(parseInt(adventurercount));
 }
 });
@@ -82,18 +83,22 @@ if($(this).val().length == 5 && e.keyCode !== 8) {
 $('form#form-adv-book').ajaxForm({
 dataType: 'json',
 beforeSubmit: function(){
+	Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Processing Request...', pos: 'bottom-right' });
 	if($('#select_payment_method').val() == 'Deposit') {
 		$('.selected-option').empty();
 	}
 },
 success: function(data) {
 	if(data.success == false) {
+		Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem while booking adventure', pos: 'bottom-right',duration:5000 });
 		$('.ccerror').show();
 		$('.err2').html(data.error);
 		$('html,body').animate({scrollTop:0},500);
 	} else if (data.success == true) {
+		Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Booking Created Successfully', pos: 'bottom-right' });
 		window.location.href = "/myadventures";
 	} else {
+		Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem while booking adventure', pos: 'bottom-right',duration:5000 });
 		$.alert('There was an internal problem');
 	}
 }

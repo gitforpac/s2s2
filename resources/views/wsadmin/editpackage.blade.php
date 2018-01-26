@@ -12,6 +12,9 @@
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
+    @if(Session::has('createpackagesuccess'))
+    <p class="alert bg-green disabled"><strong>{{ Session::get('createpackagesuccess') }}</strong></p>
+    @endif
 	  <!-- Custom Tabs (Pulled to the right) -->
 	  <div class="nav-tabs-custom">
 	    <ul class="nav nav-tabs pull-right">
@@ -101,6 +104,15 @@
                           style="margin-right: 10px; width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required="">{{$data['package']->description}}</textarea>
                       </div>
                     </div> 
+
+                    <div class="form-group row">
+                      <label class="col-sm-2">Itinerary</label>
+                      <div class="col-md-10" style="padding-left: 12px;">
+                        <textarea name="package_itinerary" class="textarea" placeholder="Write awesome Introduction for the package"
+                          style="margin-right: 10px; width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required="">{{$data['package']->itinerary}}</textarea>
+                      </div>
+                    </div>
+
                     <div class="form-group row">
                       <label class="col-sm-2">Cover Photo</label>
                         <input type="file" id="adv_image" name="package_image"  style="padding-left: 12px;" />

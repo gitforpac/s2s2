@@ -19,7 +19,7 @@
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false">Videos</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="itinerary-tab" data-toggle="tab" href="#itinerary" role="tab" aria-controls="itinerary" aria-selected="false">Itinerary</a>
+    <a class="nav-link" id="itinerary-tabw" data-toggle="tab" href="#itinerary" role="tab" aria-controls="itinerary" aria-selected="false">Itinerary</a>
   </li>
 </ul>
   <div class="tab-content" id="myTabContent">
@@ -29,7 +29,7 @@
           <div class="col-md-8">
             <div class="detail-wrap">
               <h5 class="pd-h">Introduction</h5>
-              <span>{!!$pagedata['package']->description!!}</span>
+              <span style="padding-right: 15px;">{!!$pagedata['package']->description!!}</span>
             </div>
             <div class="detail-wrap">
               <h5 class="pd-h">what's Included?</h5>
@@ -82,7 +82,11 @@
                       </td>
                       <td>₱ {{number_format($pagedata['prices']->last()->price_per)}}</td>
                       <td>
-                        <a href="/book/review/{{$pagedata['package']->id}}?scheduleid={{$s->id}}" class="book-btn">Book</button>
+                         @if(Auth::guard('user')->check())
+                        <a href="/book/review/{{$pagedata['package']->id}}?scheduleid={{$s->id}}" class="book-btn">Book</a>
+                          @else                       
+                          <a  href="javascript:void(0)" class="book-btn" data-toggle="modal" data-target="#login-form">Book</a>
+                          @endif
                       </td>
                     </tr>
                     @endforeach
@@ -98,6 +102,10 @@
               <span>{!!$cc->content!!}</span>
             </div>
             @endforeach
+            <div class="detail-wrap">
+               <h5 class="pd-h">Itinerary</h5>
+               {!!$pagedata['package']->itinerary!!}
+            </div>
             <div class="detail-wrap">
               <div class="reviews" id="comment-container">
                 <h5 class="pd-h">Reviews</h5>
@@ -201,6 +209,7 @@
 <script type="text/javascript">
 @if(Auth::guard('user')->check())
 var name = '{{Auth::guard('user')->user()->user_fullname}}';
+var c = new Client();
 c.writeComment({{$pagedata['package']->id}},{{Auth::guard('user')->id()}},name);
 @endif
 </script>

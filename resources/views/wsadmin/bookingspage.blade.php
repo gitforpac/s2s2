@@ -23,6 +23,7 @@ Package and Bookings
       <th>#</th>
       <th>Package Name</th>
       <th>Location</th>
+      <th>Bookings Count</th>
       <th>Action</th>
     </tr>
       @foreach($data['packages'] as $bk)
@@ -30,16 +31,22 @@ Package and Bookings
        <th scope="row">{{$loop->iteration}}</th>
         <td>{{$bk->name}}</td>
         <td>{{$bk->location}}</td>
+        @php
+        $i = $loop->iteration-1;
+        @endphp
         <td>
-          <a href="javascript:void(0)" class="btn-sm btn-info" id="viewbookingsbtn" data-id="{{$bk->id}}">
-            @php
-            $i = $loop->iteration-1;
-            @endphp
-            View Bookings&nbsp;&nbsp;@if($data['bookingscount'][$i] !==0)<div class="badge badge-warning">{{$data['bookingscount'][$i]}}</div>
-            @endif
+        @if($bk->bookingscount !==0)
+        Bookings: <span class="badge bg-blue">{{$bk->bookingscount}}</span></strong>
+        @else 
+        None&nbsp; <span class="badge bg-blue">{{$bk->bookingscount}}</span>
+        @endif
+        </td>
+        <td>
+          <a href="javascript:void(0)" class="btn-sm btn-info mpw" id="viewbookingsbtn" data-id="{{$bk->pid}}">
+            View Bookings
           </a>
-          <a href="/editpkg/{{$bk->id}}" class="btn-sm btn-primary">Edit Package</a>
-          <a href="javascript:void(0)" class="btn-sm btn-danger" id="deletepkgbtn" data-id="{{$bk->id}}">Delete Package</a>
+          <a href="/editpkg/{{$bk->id}}/" class="btn-sm btn-primary mpw">Edit Package</a>
+          <a href="javascript:void(0)" class="btn-sm btn-danger mpw" id="deletepkgbtn" data-id="{{$bk->pid}}">Delete Package</a>
         </td>
     </tr>
     @endforeach
@@ -84,6 +91,9 @@ Package and Bookings
 			$('#bookingsmodal .modal-body').hide().html(data).fadeIn();
 		}, 'json');
 		
+    $('#bookingsmodal').on('hidden.bs.modal', function () {
+      $('#bookingsmodal .modal-body').html('');
+    })
 	});
 
 
@@ -127,6 +137,8 @@ $(document).on('click', '#deletepkgbtn', function(e){
       }
   });
 });
+
+
 </script>
 
 @endsection

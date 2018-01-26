@@ -21,6 +21,7 @@ use App\Crew;
 use App\Notification;
 use App\Prices;
 use Response;
+use App\ContactUs;
 use App\SuperAdmin;
 
 use Auth;
@@ -34,7 +35,7 @@ class ManagersController extends Controller
 
     public function __construct()
     {
-        
+        $this->middleware('admin');
     }
 
     // package photos
@@ -104,6 +105,7 @@ class ManagersController extends Controller
         $package->duration = $request->package_durnum . ' ' . $request->package_dur;
         $package->adventure_type = $request->package_type;  
         $package->adventurer_limit = $request->package_limit;  
+        $package->itinerary = $request->package_itinerary;
         $package->thumb_img = $storedFileName;    
 
         $saved = $package->save();
@@ -156,6 +158,7 @@ class ManagersController extends Controller
         $package->latitude = $request->latitude;
         $package->longitude = $request->longitude;
         $package->adventure_type = $request->package_type;
+        $package->itinerary = $request->package_itinerary;
 
         $saved = $package->save();
 
@@ -295,9 +298,9 @@ class ManagersController extends Controller
         $v->video_thumbimg = $storedFileName;
         $v->package_id = $pid;
 
-        $vd = Package::find($pid)->videos;
-
         $saved = $v->save();
+
+        $vd = Package::find($pid)->videos;
 
         if($saved == true) {
              return Response::json(view('wsadmin.rendervideos')->with('v',$vd)->render() );
@@ -341,10 +344,16 @@ class ManagersController extends Controller
 
     public function manageCrew()
     {
-        $c = Crew::all();  
+        $c = Crew::all();
 
+        $cp = Crew::onlyTrashed()->get();;  
 
-        return view('wsadmin.managecrew')->with('m',$c);
+        $cd = array(
+                'crew' => $c,
+                'cp' => $cp
+                );
+
+        return view('wsadmin.managecrew')->with('crew',$cd);
     }
 
 
@@ -368,19 +377,57 @@ class ManagersController extends Controller
 
         $saved = $c->save();
 
+        $cd = Crew::all();
 
-        return response()->json(['success' => $saved]); 
+        return Response::json(array('success' => $saved, 'content' => view('wsadmin.rendercrewmembers')->with('crew',$cd)->render())); 
 
 
     }
 
-    public function deleteCrew($cid)
+    public function removeCrew($cid)
     {
         $c = Crew::find($cid);
 
         $deleted = $c->delete();
 
-        return Response::json(array('success' => $deleted)); 
+        $cd = Crew::all();
+
+        return Response::json(array('success' => $deleted, 'content' => view('wsadmin.rendercrewmembers')->with('crew',$cd)->render()));
+
+    }
+
+    public function crewDetails($id)
+    {
+        $u = Crew::find($id);
+
+        return Response::json(array('success' => $u->count(), 'content' => view('wsadmin.rendereditcrew')->with('crew',$u)->render()));
+    }
+
+    public function editCrewProfile($id,Request $request)
+    {
+        $c = Crew::find($id);
+
+        if($request->hasFile('avatar')) {
+            $fileNameExt = $request->avatar->getClientOriginalName();
+            $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
+            $ext = $request->avatar->getClientOriginalExtension();
+            $storedFileName = $filename.'_'.time().'.'.$ext;
+            $path = $request->avatar->storeAs('public/crew_avatars', $storedFileName);
+        } else {
+            $storedFileName = $c->avatar;
+        }
+
+        $c->name = $request->name;
+        $c->about = $request->about;
+        $c->avatar = $storedFileName;
+        $c->position = $request->position;
+        $c->contact_number = $request->contact;
+
+        $saved = $c->save();
+
+        $cd = Crew::all();
+
+        return Response::json(array('success' => $saved, 'content' => view('wsadmin.rendercrewmembers')->with('crew',$cd)->render()));
 
     }
 
@@ -427,19 +474,19 @@ class ManagersController extends Controller
 
     public function manage()
     {
-        $packages = Package::all();
+        $packagess = DB::table('packages')
+                ->leftJoin('bookings','bookings.package_id','=','packages.id')
+                ->select(['*', DB::raw('count(bookings.id) as bookingscount, packages.id as pid')])
+                ->whereNull('deleted_at')
+                ->groupBy('packages.id')
+                ->orderBy('bookingscount', 'DESC')
+                ->get();
+
         $title = 'Staff | Manage';
-        $bookingscount = array();
-        
-        foreach($packages as $p) {
-             $bookings =  Package::find($p->id)->bookings;
-             array_push($bookingscount, $bookings->count());
-        }
 
         $data = array(
-            'packages'   => $packages,
+            'packages'   => $packagess,
             'title'     => $title,
-            'bookingscount' => $bookingscount
         ); 
 
         return view('wsadmin.bookingspage')->with('data',$data);
@@ -710,6 +757,29 @@ class ManagersController extends Controller
 
         return view('wsadmin.addpackage')->with('adv_type',$atype);
     }
+
+
+    public function editcontactusView()
+    {
+        $c = ContactUs::find(1);
+
+        return view('wsadmin.editcontactus')->with('c',$c);
+    }
+
+    public function editcontactus()
+    {
+        $c = ContactUs::find(1);
+
+        $c->contactus_number;
+        $c->contactus_address;
+        $c->contactus_email;
+
+        $saved = $c->save();
+
+        return Response::json(['success' => $saved]);
+    }
+
+
 
 
 

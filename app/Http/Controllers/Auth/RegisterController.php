@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use App\Rules\greaterThan;
 
 
@@ -36,7 +37,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -65,10 +66,11 @@ class RegisterController extends Controller
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'contact' => 'required',
             'password' => 'required|min:6',
-            'birthdate_month' => 'required|max:255',
-            'birthdate_day' => 'required|max:255',
-            'birthdate_year' => ['required', new greaterThan],
+            'birthdate_month' => ['required','max:255',Rule::notIn(['Month', 'month'])],
+            'birthdate_day' => ['required','max:255',Rule::notIn(['Day', 'day'])],
+            'birthdate_year' => ['required', new greaterThan,Rule::notIn(['Year', 'year'])],
         ],$messages);
 
         if($vaild->fails()){
@@ -111,6 +113,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'avatar' => 'da.jpg',
+            'phone' => $data['contact']
         ]);
 
     }
@@ -123,6 +126,12 @@ class RegisterController extends Controller
     protected function guard()
     {
         return Auth::guard('user');
+    }
+
+
+    protected function redirectTo()
+    {
+        return url()->previous();
     }
 
 

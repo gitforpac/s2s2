@@ -27,6 +27,7 @@
         <link rel="stylesheet" type="text/css" href="/css/loaders.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/snackbar.min.css">
         <script
           src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -80,11 +81,13 @@
 </div>
 </div>
     @yield('content')
-    <script src="{{ url('/') }}/AjaxRegister/AjaxRegister.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     @include('inc.registerform')
     @include('inc.loginform')
     </div>
+    @if(Auth::guard('admin')->check())
+      <a href="/crew/dashboard" class="btn btn-primary btd"><i class="fa fa-arrow-left" style="color: #fff;"></i> Back to Dashboard</a>
+   @endif
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
@@ -92,6 +95,7 @@
     <script type="text/javascript" src="/js/infobubble.js"></script>
     <script type="text/javascript" src="/js/oop/app.js"></script>
     <script type="text/javascript" src="/js/l.js"></script>
+    <script type="text/javascript" src="/js/snackbar.min.js"></script>
     @yield('utils')  
     </body>
 </html>

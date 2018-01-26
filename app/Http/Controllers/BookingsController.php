@@ -16,10 +16,17 @@ use App\Admin;
 use App\Notifications\NotifyNewBooking;
 use Notification;
 use App\Events\NewBooking;
+use Illuminate\Support\Facades\Session;
 use App\Prices;
 
 class BookingsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('user');
+        if(!Session::has('transactionsession')) {
+            return redirect()->route('adventures');
+        }
+    }
 
     private $bookingfee = 0.20;
     public $error = '';
@@ -54,6 +61,7 @@ class BookingsController extends Controller
 
                 Notification::send($admins,new NotifyNewBooking($package));
 
+                $request->session()->forget('transactionsession');
 
                 return Response::json(['success' => $saved]); 
 
@@ -85,6 +93,8 @@ class BookingsController extends Controller
 
                 Notification::send($admins,new NotifyNewBooking($package));
 
+                $request->session()->forget('transactionsession');
+
                 return Response::json(['success' => $saved]); 
             }
             } else {
@@ -104,6 +114,10 @@ class BookingsController extends Controller
 
     public function review($pid, Request $request)
     {
+        if(!Session::has('transactionsession')) {
+            return redirect()->route('adventures');
+        }
+
         $schedule = (int)$request->query('scheduleid');
         $schedules = Package::find($pid)->schedules->where('id','=',$schedule)->first();
         $prices = DB::table('prices')
@@ -115,50 +129,6 @@ class BookingsController extends Controller
             $package  = Package::find($pid);
             $title    = 'Review Booking';
             $contents =  Package::find($pid)->contents;
-
-        //     for($i=1;$i<=$package->adventurer_limit;$i++) {
-        //     switch ($i) {
-        //         case 1:
-        //             array_push($prices, $package->price*($package->adventurer_limit/2)-800);
-        //             break;
-        //         case 2:
-        //             array_push($prices, $package->price*3);
-        //             break;
-        //         case 3:
-        //             array_push($prices, $package->price*2+800);
-        //             break;
-        //         case 4:
-        //             array_push($prices, $package->price*2+400);
-        //             break;
-        //         case 5:
-        //             array_push($prices, $package->price*2);
-        //             break;
-        //         case 6:
-        //             array_push($prices, $package->price+1000);
-        //             break;
-        //         case 7:
-        //             array_push($prices, $package->price+900);
-        //             break;
-        //         case 8:
-        //             array_push($prices, $package->price+800);
-        //             break;
-        //         case 9:
-        //             array_push($prices, $package->price+700);
-        //             break;
-        //         case 10:
-        //             array_push($prices, $package->price+600);
-        //             break;
-        //         case 11:
-        //             array_push($prices, $package->price+500);
-        //             break;
-        //         case 12:
-        //             array_push($prices, $package->price+400);
-        //             break;
-        //         default:
-        //             array_push($prices, $package->price);
-
-        //     }
-        // }
 
             $data = array(
                 'package'   => $package,
@@ -241,7 +211,7 @@ class BookingsController extends Controller
                         ->get();
 
 
-        return Response::json(['per' => $total->first()->price_per,'total'=>($total->first()->person_count*$total->first()->price_per)]); 
+        return Response::json(['per' => number_format($total->first()->price_per,2),'total'=>round(($total->first()->person_count*$total->first()->price_per*$this->bookingfee),0)]); 
 
     }
 
@@ -311,4 +281,6 @@ class BookingsController extends Controller
     {
         $lp = $this->bookingfee*0.02;
     }
+
+    
 }
