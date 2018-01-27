@@ -25,14 +25,20 @@ use View;
 
 class SuperAdminController extends Controller
 {
-  public function ManageAdmin()
+
+    // manage accounts
+
+    public function ManageAdmin()
     {
-      return view('superadmin.manageadmin');
+
+        $c = SuperAdmin::all();
+
+        return view('superadmin.manageadmin')->with('m',$c);
     } 
 
     public function manageCrew()
     {
-        $c = SuperAdmin::all();  
+        $c = Admin::all();  
 
         return view('superadmin.managecrew')->with('m',$c);
     }
@@ -46,7 +52,7 @@ class SuperAdminController extends Controller
   public function addCrewManager(Request $request)
   {
 
-  	$a = DB::table('superadmins')->insert(
+  	$a = DB::table('admins')->insert(
 		    ['username' => $request->username, 
             'email' => $request->email, 
 		     'password' => bcrypt($request->password),

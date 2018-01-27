@@ -1,5 +1,9 @@
 
 
+.pace {
+	display: none !important;
+}
+
 
 .btd {
 	position: fixed;
@@ -520,7 +524,7 @@ ul {
 }
 .form-signin .form-control:focus {
   z-index: 2;
-  border: 1px solid #A8B8C4;
+  border: 1px solid #20151F;
 }
 .form-signin input[type="text"] {
   margin-bottom: 10px;
@@ -545,6 +549,7 @@ ul {
 	background-color: #db4437;
 	border-color: #db4437;
 	color: #fff;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
 
 .gbtn:hover {
@@ -559,49 +564,7 @@ ul {
 	border-color: #3b5998;
 	margin-bottom: 12px;
 	color: #fff;
-}
-
-button.mybtn1 {
-	margin-top: 5px;
-	color: #fff;
-	background-color: #41B7C4;
-	border-color: #41B7C4;
-	cursor: pointer;
-	border-radius: 0px !important;
-}
-.jconfirm-box i {
-	font-size: 90px !important;
-	color: #4286f4 !important;
-}
-.text-red {
-	color: #a31818;
-	font-size: 13px;
-}
-#errorm {
-	color: #a31818;
-	padding-bottom: 15px;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 25px;
-}
-
-#errorm a {
-	color: #138246;
-}
-
-.error-box {
-	position: relative;
-	top: -5px;
-	margin-bottom: 3px;
-}
-#loading {
-  display: inline;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-#loading img{
-  margin-top: -2px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
 
 .fbtn:hover {
@@ -613,17 +576,33 @@ button.mybtn1 {
 }
 
 .pad {
-	width: 900px;
+	margin-left: 80px;
+	width: 400px;
 }
+
+.pad2 {
+	margin-left: 45px;
+	width: 500px;
+}
+
+
+
 .r { width:100%; text-align:center; border-bottom: 1px solid #000; line-height:0.1em; margin:10px 0 20px; opacity: 0.4;} 
 .r span { background:#fff; padding:0 10px; font-weight: 400;}
 
 div.form-icon {
 	position: absolute;
-	right: 35px;
+	right: 40px;
 	z-index: 10;
 	margin-top: 10px;
 }
+div.form-icon2 {
+	position: absolute;
+	right: 85px;
+	z-index: 10;
+	margin-top: 10px;
+}
+
 
 #register-form select {
 	width: 100%;
@@ -666,7 +645,7 @@ div.form-icon {
 	background-color: #fff;
 	width: 100%;
 	padding: 10px;
-	 background: transparent url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") no-repeat 100px center;
+	background: transparent url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") no-repeat 85px center;
 }
 .reg-select2 {
 	height: 36px;
@@ -718,7 +697,7 @@ div.cfg a {
 	line-height: 20px;
 	padding: 0px;
 	margin: 0px;
-	color: #00305B;
+	color: #903F39;
 }
 
 span.register-bday {

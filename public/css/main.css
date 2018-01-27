@@ -223,10 +223,12 @@ table.tb td, table.tb th {
 }
 
 
-td a.disabled {
-	pointer-events: none;
+td .booked {
+	pointer-events: none !important;
 	background-color: #ccc;
 	min-width: 56px !important;
+	cursor: pointer;
+	background-color: #D27049 !important;
 }
 
 .chat
@@ -1151,12 +1153,17 @@ div.lg-backdrop {
 
 
 
-td a.book-btn {
+td .book-btn {
 	background-color: #41B7C4;;
 	border: 0px transparent;
 	padding: 0.4em 0.9em;
 	cursor: pointer;
 	border-radius: 3px;
+}
+
+td .book-btn:focus {
+	outline: none !important;
+	border: none !important;
 }
 
 table.table .book-btn {

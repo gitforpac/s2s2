@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 @section('content')
 <div class="container mhmh">
-@if($data->isEmpty())
+@if($pagedata['bookings']->isEmpty())
 <h5 class="select-adv">Select Your Adventure!</h5>
 <a href="/adventures" class="btn-lg bgws text-white">Find Adventure</a>
 @else
-@foreach($data as $d)
+@foreach($pagedata['bookings'] as $d)
 <div class="row">
 <div class="col-md-8 col-sm-12">
   <div class="card n612">
@@ -17,9 +17,20 @@
 	    	</div>
 	    	<div class="col-md-8">
 	    		<h5 class="bh">{{$d->name}}</h5>
-	    		<p><i class="fa fa-calendar" aria-hidden="true"></i> {{date('M d, Y, D', strtotime($d->date))}}</p>
-	    		<p><i class="fa fa-user-o" aria-hidden="true"></i> {{$d->num_guest}} Adventurer(s)</p>
-	    		<p><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;<a href="#" id="cancelbkbtn" data-id="{{$d->id}}">Cancel</a></p>
+	    		<p><i class="fa fa-calendar"></i> {{date('M d, Y, D', strtotime($d->date))}}</p>
+	    		<p><i class="fa fa-user-o"></i> {{$d->num_guest}} Adventurer(s)</p>
+	    		<p><i class="fa fa-ban"></i> &nbsp;<a href="#" id="cancelbkbtn" data-id="{{$d->id}}">Cancel</a></p>
+	    		<p><i class="fa fa-calendar-minus-o"></i> &nbsp;<a href="#" id="modifybkbtn" data-id="{{$d->id}}" data-pid="{{$d->pid}}" data-flag="0">Change Schedule</a></p>
+	    	</div>
+	    </div>
+	    <br>
+	    <div class="row">
+	    	<div class="col-md-12" >
+	    		<div class="form-loading text-center" style="display: none;">
+	              <img src="{{ asset('img/loader.svg') }}">
+	            </div>
+	            <div id="modify-available-schedules">
+	            </div>
 	    	</div>
 	    </div>
 	  </div>
@@ -83,7 +94,27 @@
 	    }
 	});
 
-	})
+	});
+
+
+	$(document).on('click', '#modifybkbtn', function(e){
+
+		if($(this).data('flag') == 0) {
+			$('.form-loading').show();
+			$(this).data('flag',1);
+			var id = $(this).data('pid');
+			var bid = $(this).data('id');
+			$.get('/schedules/'+id+'/'+bid, function(res) {
+					$('#modify-available-schedules').hide().html(res).slideToggle();
+					$('.form-loading').hide();
+			});
+		} else {
+			$(this).data('flag',0);
+			$('#modify-available-schedules').slideToggle().html('');
+
+		}
+		
+	});
 </script>
 @endsection
 

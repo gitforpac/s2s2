@@ -18,7 +18,7 @@ class RedirectIfSuperadmin
 	public function handle($request, Closure $next, $guard = 'superadmin')
 	{
 	    if (Auth::guard($guard)->check()) {
-	        return redirect('superadmin/home');
+	        return redirect('superadmin/dashboard');
 	    }
 
 	    return $next($request);

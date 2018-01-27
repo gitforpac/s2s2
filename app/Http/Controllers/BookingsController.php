@@ -39,11 +39,17 @@ class BookingsController extends Controller
 
         $validateCC = $this->checkCC($request->cardnumber,$request->exp,$request->cvv,$request->total_payment);
 
+        $schedulecheck = Schedule::find($request->schedule);
 
+        if($schedulecheck->schedule_status == 1) {
 
-        if($request->select_payment_method === 'Deposit') {
+            return Response::json(['success' => false]); 
+        } else {
+
+            if($request->select_payment_method === 'Deposit') {
 
             $b = new Booking;
+            $s = Schedule::find($request->schedule);
 
             $b->client = Auth::guard('user')->user()->id;
             $b->package_id = $pid;
@@ -52,9 +58,13 @@ class BookingsController extends Controller
             $b->schedule_id = $request->schedule;
             $b->payment_method = 'Deposit';
 
+            
+            $s->schedule_status = 1;
+            $ss = $s->save();
+
             $saved = $b->save();
 
-            if($saved) {
+            if($saved && $ss) {
 
                 $admins = Admin::all();
                 $package = Package::find($pid);
@@ -70,40 +80,50 @@ class BookingsController extends Controller
             }
     
 
-        } elseif ($request->select_payment_method === 'Credit Card') {
+            } elseif ($request->select_payment_method === 'Credit Card') {
 
-            if(!$validateCC == false) { 
+                if(!$validateCC == false) { 
 
-            $b = new Booking;
+                $b = new Booking;
+                $s = Schedule::find($request->schedule);
 
-            $b->client = Auth::guard('user')->user()->id;
-            $b->package_id = $pid;
-            $b->num_guest = $request->num_guest;
-            $b->payment = $request->total_payment;
-            $b->schedule_id = $request->schedule;
-            $b->payment_method = 'Credit Card';
+                $b->client = Auth::guard('user')->user()->id;
+                $b->package_id = $pid;
+                $b->num_guest = $request->num_guest;
+                $b->payment = $request->total_payment;
+                $b->schedule_id = $request->schedule;
+                $b->payment_method = 'Credit Card';
 
-            $saved = $b->save();
+                $s->schedule_status = 1;
+                $ss = $s->save();
 
-            if($saved) {
+                $saved = $b->save();
+
+                if($saved && $ss) {
 
 
-                $admins = Admin::all();
-                $package = Package::find($pid);
+                    $admins = Admin::all();
+                    $package = Package::find($pid);
 
-                Notification::send($admins,new NotifyNewBooking($package));
+                    Notification::send($admins,new NotifyNewBooking($package));
 
-                $request->session()->forget('transactionsession');
+                    $request->session()->forget('transactionsession');
 
-                return Response::json(['success' => $saved]); 
-            }
+                    return Response::json(['success' => $saved]); 
+                }
+                } else {
+                    return Response::json(['success' => $validateCC, 'error' => $this->error]);  
+                }
+
             } else {
-                return Response::json(['success' => $validateCC, 'error' => $this->error]);  
+                return Response::json(['success' => 'error']);
             }
 
-        } else {
-            return Response::json(['success' => 'error']);
         }
+
+
+
+        
 
         
 

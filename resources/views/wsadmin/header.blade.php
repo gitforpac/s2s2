@@ -190,7 +190,7 @@
             <a href="{{ route('logout') }}" class="dropdown-item" 
                   onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();" data-toggle="control-sidebar">Logout &nbsp;<i class="fa fa-gears"></i></a>
-            <form id="logout-form" action="/logout" method="POST" style="display: none;">
+            <form id="logout-form" action="/superadmin/logout" method="POST" style="display: none;">
             {{ csrf_field() }}
             </form>
           </li>

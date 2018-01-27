@@ -42,7 +42,7 @@ $('#registerform').ajaxForm({
   dataType: 'json',
   beforeSubmit: function() {
     $(this).prop('disabled', true);
-    Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Creating Account...', pos: 'bottom-right' });
+    Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Creating Account...', pos: 'bottom-right',duration:15000 });
   },
   success: function(res) {
     $(this).prop('disabled', false);

@@ -10,7 +10,10 @@ use App\Comment;
 use Response;
 use DB;
 use Image; 
-use Package;
+use App\Package;
+use App\Prices;
+use App\Schedule;
+use App\Booking;
 
 class AdventurerController extends Controller
 {
@@ -202,6 +205,72 @@ class AdventurerController extends Controller
          $u = User::find(Auth::guard('user')->id());
 
          return view('Adventurer.editprofile')->with('user',$u);
+    }
+
+    public function showUserBookings()
+     {
+        $title = 'My Adventures';
+        $bookings = DB::table('bookings')->selectRaw('bookings.schedule_id,bookings.package_id,bookings.num_guest,bookings.id,packages.thumb_img,packages.name,schedules.date , packages.id as pid, schedules.id as sid')
+                                         ->join('schedules', 'schedules.id' ,'=','bookings.schedule_id')
+                                         ->join('packages' ,'packages.id','=','bookings.package_id')             
+                                         ->where(['client' => Auth::guard('user')->user()->id])
+                                         ->whereNotIn('status', ['cancelled'])
+                                         ->get();
+        $data = array(
+            'bookings' => $bookings,
+            'title' => $title
+        );
+
+        return view('Adventurer.trips')->with('pagedata',$data);
+     }
+
+    public function showPackageSchedules($id,$bid)
+    {
+        $schedules = Package::find($id)->schedules;
+        $prices = Package::find($id)->prices;
+        
+
+        $data = array(
+            'schedules'   => $schedules,
+            'prices' =>  $prices,
+            'cbi' => $bid,
+        );
+
+        return Response::json(view('Adventurer.renders.renderschedules')->with('pagedata',$data)->render() );
+    }
+
+    public function changebookingSchedule($bid,$sid)
+    {
+
+        $sf = Schedule::find($sid);
+
+        if($sf->schedule_status !== 1) {
+
+            $b = Booking::find($bid);
+
+            $s = Schedule::find((int)$b->schedule_id);
+
+            $s->schedule_status = '0';
+
+            $saved2 = $s->save();
+
+            $ss = Schedule::find((int)$sid);
+
+            $ss->schedule_status = '1';
+
+            $saved3 = $ss->save();
+
+            $b->schedule_id = $sid;
+
+            $saved = $b->save();
+
+            if($saved && $saved2 && $saved3) {
+                 return Response::json(array('success' => $saved));  
+            }
+        } else {
+            return Response::json(array('success' => false));
+        }
+        
     }
 
 }

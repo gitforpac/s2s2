@@ -14,7 +14,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-         <li><a href="/admin/dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+         <li><a href="/superadmin/dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
         
         <li class="treeview">
           <a href="#">
@@ -25,8 +25,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/admin/manage"><i class="fa fa-table"></i> Packages and Bookings</a></li>
-            <li><a href="/admin/add"><i class="fa fa-plus-circle"></i> Add Package</a></li>
+            <li><a href="/superadmin/manage"><i class="fa fa-table"></i> Packages and Bookings</a></li>
+            <li><a href="/superadmin/add"><i class="fa fa-plus-circle"></i> Add Package</a></li>
             <li><a href="#" data-toggle="modal" data-target="#add_adventure_type"><i class="fa fa-plus-circle"></i> Add Adventure Type</a></li>
           </ul>
         </li>
@@ -40,13 +40,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/manageadventurer"><i class="fa fa-qq"></i> Adventurer</a></li>
-            <li><a href="/managecrew"><i class="fa fa-group"></i> Crew</a></li>
-            <li><a href="/manageadmin"><i class="fa fa-user-secret"></i> Superadmin</a></li>
+            <li><a href="/superadmin/manageadventurer"><i class="fa fa-qq"></i> Adventurer</a></li>
+            <li><a href="/superadmin/managecrew"><i class="fa fa-group"></i> Crew</a></li>
+            <li><a href="/superadmin/manageadmin"><i class="fa fa-user-secret"></i> Superadmin</a></li>
           </ul>
         </li>
 
-        <li><a href="/admin/dashboard"><i class="fa fa-history" aria-hidden="true"></i> <span>Bookings History</span></a></li>
+        <li><a href="/superadmin/dashboard"><i class="fa fa-history" aria-hidden="true"></i> <span>Bookings History</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -18,6 +18,7 @@ use App\AdventureType;
 use App\Admin;
 use App\Content;
 use App\Crew;
+use Hash;
 use App\Notification;
 use App\Prices;
 use Response;
@@ -779,6 +780,28 @@ class ManagersController extends Controller
         return Response::json(['success' => $saved]);
     }
 
+
+    public function changePassword(Request $request, $id)
+    {
+
+        $client = Admin::findorFail($id);
+
+        $oldpassword = $client->password;
+        $uopi = $request->input('oldpassword');
+        
+        if(Hash::check($uopi,$oldpassword)) {
+            $client->password = Hash::make($request->input('newpassword'));
+            $client->save();
+            return response()->json([
+                'changepassword' => true,
+            ]);
+        } else {
+            return response()->json([
+                'changepassword' => false,
+            ]);
+        }
+        
+    }
 
 
 

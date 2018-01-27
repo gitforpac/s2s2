@@ -80,6 +80,7 @@ class Client {
 	{
 		$('#user-changepassword').submit(function(event){
 			event.preventDefault(event)
+			Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Changing Password...', pos: 'bottom-right',duration:15000 });
 			var userdata = {
 				'oldpassword' : $(this).find('#old_password').val(),
 				'newpassword' : $(this).find('#new_password').val()
@@ -90,18 +91,12 @@ class Client {
 				
 				// if success flash success message
 				if (res.changepassword == true) {
+					Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Password Changed', pos: 'bottom-right' });
 					$('#user-changepassword').each(function() {
 						this.reset()
 					});
-					var output = '<p class="success"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Successful changing password</p>';
-					$('.message-status').show();
-					$('div.message-status').html(output);
-					$('.message-status p').fadeOut(10000);
 				} else {
-					var output = '<p class="error"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;There was an error changing password | Make sure everything matches</p>';
-					$('.message-status').show();
-					$('div.message-status').html(output)
-					$('.message-status p').fadeOut(10000);
+					Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem changing password', pos: 'bottom-right',duration:15000 });
 				}
 
 				//else flash error message
@@ -111,7 +106,7 @@ class Client {
 
 
 
-	writeComment(pid,user,name)
+	writeComment(pid,user,name,avatar)
 	{
 		$('#commentbtn').click(function(){	
 			if($('textarea[name=comment]').val()) {
@@ -123,7 +118,7 @@ class Client {
 					if(response.status===200 && response.statusText === "OK") {
 			    		$('#commentbtn').prop('disabled', false);
 			    		var t = new Template();
-			    		var putcomment = t.putComment(comment['comment'],name);
+			    		var putcomment = t.putComment(comment['comment'],name,avatar);
 			    		$('#comment-box').before(putcomment);
 			    		$('textarea[name=comment]').val('')
 			    	}
@@ -239,10 +234,10 @@ class Template {
 			return output;
 	}
 
-	putComment(comment,user)
+	putComment(comment,user,avatar)
 	{
 		var output = '<div class="comment-wrapper animated fadeIn"><div class="commentor">';
-			output += ' <img src="/img/da.jpg">';
+			output += ' <img src="/storage/user_avatars/'+avatar+'">';
 			output += '<div class="review-s1">';
 			output += '<h3 style="">'+user+'</h3></div>';
 			output += '</div><div class="comment">';

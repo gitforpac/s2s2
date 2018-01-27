@@ -8,8 +8,8 @@
         <div class="card-body text-center">
           <h2></h2>
          
-          <a href="#" style="margin-bottom: 160px;">View Profile</a><br>
-          <a href="http://localhost:8000/adventurer/{{ Auth::id() }}/edit">Edit Profile</a>
+          <a href="/myprofile" style="margin-bottom: 160px;">View Profile</a><br>
+          <a href="/adventurer/{{Auth::guard('user')->id()}}/edit">Edit Profile</a>
         </div>
       </div>
     </div>  

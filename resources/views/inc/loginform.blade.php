@@ -38,7 +38,7 @@
         <small>Remember Me</small>
         </label>
         <button type="submit" class="btn btn-block mybtn1" id="loginbtn" style="margin-top: 5px;">Login</button>
-        <a style="color: #00305B;" href="#register-form" data-toggle="modal" data-dismiss="modal" class="btn btn-block mybtn1">Don't have an account? Register</a>
+        <a style="color: #20151F;" href="#register-form" data-toggle="modal" data-dismiss="modal" class="btn btn-block mybtn1">Don't have an account? Register</a>
       </div>
       </div>  
 </form>

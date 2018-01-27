@@ -175,7 +175,12 @@
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a href="{{ route('logout') }}" class="dropdown-item" 
+                  onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();" data-toggle="control-sidebar">Logout &nbsp;<i class="fa fa-gears"></i></a>
+            <form id="logout-form" action="/admin/logout" method="POST" style="display: none;">
+            {{ csrf_field() }}
+            </form>
           </li>
         </ul>
       </div>

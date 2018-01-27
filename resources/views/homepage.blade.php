@@ -22,10 +22,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
     <script type="text/javascript">
-
         Pace.on('done', function() {
           setTimeout(function(){ 
-            $('.loader-overlay').fadeOut();
+            $('.loader-overlay').fadeOut('fast');
             $('.content-wrapper').fadeIn();
           }, 500);
             

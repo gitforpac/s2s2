@@ -83,7 +83,7 @@
                       <td>₱ {{number_format($pagedata['prices']->last()->price_per)}}</td>
                       <td>
                          @if(Auth::guard('user')->check())
-                        <a href="/book/review/{{$pagedata['package']->id}}?scheduleid={{$s->id}}" class="book-btn">Book</a>
+                         <a href="/book/review/{{$pagedata['package']->id}}?scheduleid={{$s->id}}" class="book-btn @if($s->schedule_status == 1) booked @endif">@if($s->schedule_status == 1) Not availabe: Booked @else Book @endif</a>
                           @else                       
                           <a  href="javascript:void(0)" class="book-btn" data-toggle="modal" data-target="#login-form">Book</a>
                           @endif
@@ -111,7 +111,7 @@
                 @foreach($pagedata['comments'] as $c)
                 <div class="comment-wrapper">
                 <div class="commentor">
-                  <img src="{{asset('img/da.jpg')}}">
+                  <img src="/storage/user_avatars/{{Auth::guard('user')->user()->avatar}}">
                   <div class="review-s1">
                     <h3 style="">{{$c->user_fullname}}</h3>
                   </div>
@@ -210,8 +210,9 @@
 <script type="text/javascript">
 @if(Auth::guard('user')->check())
 var name = '{{Auth::guard('user')->user()->user_fullname}}';
+var avatar = '{{Auth::guard('user')->user()->avatar}}';
 var c = new Client();
-c.writeComment({{$pagedata['package']->id}},{{Auth::guard('user')->id()}},name);
+c.writeComment({{$pagedata['package']->id}},{{Auth::guard('user')->user()->id}},name,avatar);
 @endif
 </script>
 <script type="text/javascript" src="/js/package.js"></script>

@@ -54,6 +54,6 @@
 @section('utils')
 <script type="text/javascript">
   var user = new Client();
-  user.changePassword({{Auth::id()}});
+  user.changePassword({{Auth::guard('user')->id()}});
 </script>
 @endsection
