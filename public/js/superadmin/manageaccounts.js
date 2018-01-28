@@ -21,6 +21,7 @@ $(document).on('click','#view-p',function(){
 
 });
 
+
 $(document).on('click','a#rcab',function(e) {
 e.preventDefault();
 var id = $(this).data('id');

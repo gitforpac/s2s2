@@ -64,14 +64,20 @@ $('[data-toggle="datepicker"]').datepicker({startDate:today});
     }
 
     var stateObj = { page: 1 };
-     window.history.pushState(stateObj, "Packages", "adventures"+url);
-    $('.main-packages-wrapper').addClass('disabled-div');
-    $.get( "/adventures"+url, function( data ) {
-      $('ul.pagination').hide();
-      $('.main-packages-wrapper').removeClass('disabled-div'); 
-      $('.main-packages-wrapper').html(data);
-     
-    });
+    window.history.pushState(stateObj, "Packages", "adventures"+url);
+
+    $.ajax({
+      type:'GET',
+      dataType: "json",
+      url:'/adventures'+url,
+      cache: false,
+      success: function (data) {
+        $('ul.pagination').hide();
+        $('.main-packages-wrapper').removeClass('disabled-div'); 
+        $('.main-packages-wrapper').html(data);
+      }
+  });
+
   });
 
   $('#adventure-type').change(function (e) {
@@ -92,12 +98,17 @@ $('[data-toggle="datepicker"]').datepicker({startDate:today});
     var stateObj = { page: 2 };
     window.history.pushState(stateObj, "AdventureType", "adventures"+url);
     $('.main-packages-wrapper').addClass('disabled-div');
-    $.get( "/adventures"+url, function( data ) {
-      $('ul.pagination').hide();
-      $('.main-packages-wrapper').removeClass('disabled-div'); 
-      $('.main-packages-wrapper').html(data);
-     
-    });
+    $.ajax({
+      type:'GET',
+      dataType: "json",
+      url:'/adventures'+url,
+      cache: false,
+      success: function (data) {
+        $('ul.pagination').hide();
+        $('.main-packages-wrapper').removeClass('disabled-div'); 
+        $('.main-packages-wrapper').html(data);
+      }
+  });
   });
 
   $('#adventure-date').on('input',function (e) {
@@ -118,12 +129,17 @@ $('[data-toggle="datepicker"]').datepicker({startDate:today});
     var stateObj = { page: 3 };
      window.history.pushtate(stateObj, "AdventureDate", "adventures"+url);
     $('.main-packages-wrapper').addClass('disabled-div');
-    $.get( "/adventures"+url, function( data ) {
-      $('ul.pagination').hide();
-      $('.main-packages-wrapper').removeClass('disabled-div'); 
-      $('.main-packages-wrapper').html(data);
-     
-    });
+    $.ajax({
+      type:'GET',
+      dataType: "json",
+      url:'/adventures'+url,
+      cache: false,
+      success: function (data) {
+        $('ul.pagination').hide();
+        $('.main-packages-wrapper').removeClass('disabled-div'); 
+        $('.main-packages-wrapper').html(data);
+      }
+  });
   });
 
 window.onpopstate = function() {

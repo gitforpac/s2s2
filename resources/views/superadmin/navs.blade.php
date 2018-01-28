@@ -47,6 +47,7 @@
         </li>
 
         <li><a href="/superadmin/dashboard"><i class="fa fa-history" aria-hidden="true"></i> <span>Bookings History</span></a></li>
+        <li><a href="/superadmin/changepassword"><i class="fa fa-lock"></i> <span>Change Password</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

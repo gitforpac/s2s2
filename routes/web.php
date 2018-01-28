@@ -168,18 +168,25 @@ Route::group(['prefix' => 'superadmin'], function () { // 'middleware' => ['supe
     Route::get('/manageadventurer', 'SuperAdminController@ManageAdventurer');
     Route::get('/managecrew', 'SuperAdminController@ManageCrew');
     Route::get('/manageadmin', 'SuperAdminController@ManageAdmin');
-    Route::post('/deleteuser/{id}','SuperAdminController@deleteAccAdventurer');
-    Route::delete('/removecrewaccount/{id}','SuperAdminController@deleteAccCrew');
+    Route::view('/changepassword', 'superadmin.changepassword');
+    Route::post('/updatepassword/{id}', 'ManagersController@changePassword');
+    
+    
     Route::post('/deleteadmin/{id}','SuperAdminController@deleteAccAdmin');
     Route::post('/addmanager','SuperAdminController@addCrewManager');
     Route::post('/addadventurer','SuperAdminController@addAccountUser');
     Route::post('/addadmin','SuperAdminController@addAccountAdmin');
     Route::get('/editadventurer/{id}', 'SuperAdminController@EditAdventurer');
 
-    
-    Route::get('/editcrew/{id}', 'SuperAdminController@EditCrew');
+
+    Route::delete('/removecrewaccount/{id}','SuperAdminController@deleteAccCrew');
     Route::get('/getcrewaccount/{id}', 'SuperAdminController@getcrewaccount');
     Route::post('/editcrewaccount/{id}', 'SuperAdminController@editcrewaccount');
+
+    Route::delete('/removeadvaccount/{id}','SuperAdminController@deleteAccAdventurer');
+    Route::get('/editadv/{id}', 'SuperAdminController@EditCrew');
+    Route::get('/getadvaccount/{id}', 'SuperAdminController@getadvaccount');
+    Route::post('/editadvaccount/{id}', 'SuperAdminController@editadvaccount');
     //sa crew
     Route::view('/dashboard', 'superadmin.dashboard',['title' => 'Dashboard']);
     Route::get('/manage', 'SuperAdminController@manage');

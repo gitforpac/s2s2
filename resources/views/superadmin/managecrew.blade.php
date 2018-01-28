@@ -13,7 +13,7 @@
         <i class="fa fa-plus pr-5"></i> Create Accout</button>
     </div>
   </div>
-<div class="box-body col-sm-6">
+<div class="box-body col-sm-8">
   <table class="table table-bordered table-striped table-sm text-center">
   @if(empty($m))
   <h5>No Crew Admin account - create one?</h5>

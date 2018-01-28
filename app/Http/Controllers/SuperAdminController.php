@@ -45,7 +45,9 @@ class SuperAdminController extends Controller
 
     public function ManageAdventurer()
     {
-      return view('superadmin.manageadventurer');
+        $c = User::all();
+
+        return view('superadmin.manageadventurer')->with('m',$c);
     } 
 
 
@@ -59,7 +61,9 @@ class SuperAdminController extends Controller
 		     'avatar' => 'default_avatar.png' ]
 		);
 
-    return Response::json(array('success' => $a)); 
+    if($a) {
+        return redirect('/superadmin/managecrew')->with('crewaccount', 'Account Created!'); 
+    }
 
   }
 
@@ -67,7 +71,19 @@ class SuperAdminController extends Controller
   {
     $c = Admin::find($id);
 
-    var_dump($request->all());
+    if($request->password !== NULL) {
+        $c->password = $request->editpassword;
+    }
+
+    $c->username = $request->editusername;
+    $c->email = $request->editemail;
+    $c->name = $request->editname;
+
+    $saved = $c->save();
+
+    if($saved) {
+        return redirect('/superadmin/managecrew')->with('crewaccount', 'Account updated!'); 
+    }
 
   }
 
@@ -76,6 +92,32 @@ class SuperAdminController extends Controller
     $c = Admin::find($id);
 
     return $c;
+  }
+
+   public function getadvaccount($id) 
+  {
+    $c = User::find($id);
+
+    return $c;
+  }
+
+  public function editadvaccount($id,Request $request)
+  {
+    $c = User::find($id);
+
+    if($request->password !== NULL) {
+        $c->password = $request->editpassword;
+    }
+
+    $c->email = $request->editemail;
+    $c->user_fullname = $request->editname;
+
+    $saved = $c->save();
+
+    if($saved) {
+        return redirect('/superadmin/manageadventurer')->with('account', 'Account updated!'); 
+    }
+
   }
 
 
@@ -127,17 +169,43 @@ class SuperAdminController extends Controller
 
   	$deleted = $n->delete();
 
+
   	return Response::json(array('success' => $deleted)); 
   }
 
-  public function deleteAccAdventurer($id)
+  public function deleteAccAdventurer($id,Request $request)
   {
   	$n = User::find($id);
 
   	$deleted = $n->delete();
 
+    $request->session()->flash('accountd', 'Account was deactivated');
+
   	return Response::json(array('success' => $deleted)); 
   }
+
+
+  public function changePassword(Request $request, $id)
+    {
+
+        $client = SuperAdmin::findorFail($id);
+
+        $oldpassword = $client->password;
+        $uopi = $request->input('oldpassword');
+        
+        if(Hash::check($uopi,$oldpassword)) {
+            $client->password = Hash::make($request->input('newpassword'));
+            $client->save();
+            return response()->json([
+                'changepassword' => true,
+            ]);
+        } else {
+            return response()->json([
+                'changepassword' => false,
+            ]);
+        }
+        
+    }
 
 // public function upload($pid,Request $request)
 //     {
