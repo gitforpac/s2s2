@@ -6,10 +6,10 @@
 <script type="text/javascript">
 
 window.addEventListener('load',function() {
-location.reload(true);
+window.location = "/";
 },false);
 
-window.location = "/";
+
 
 </script>
 </head>
