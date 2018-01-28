@@ -1,7 +1,5 @@
 
 
-  var stateObj = { page: initialpage };
-   window.history.pushtate(stateObj, "initialpage", "package");
 
   var c = new Client();
   
