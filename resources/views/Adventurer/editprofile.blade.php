@@ -23,13 +23,13 @@
           </div>
 
           <div class="card-body">
-            <div class="form-loading text-center">
+            <div class="form-loading text-center" id="loading">
               <img src="{{ asset('img/loader.svg') }}">
             </div>
             <div class="message-status text-center">
             </div>
             <div id="edit-profile-body" style="display: none;">
-            <form class="form-group">
+            <form class="form-group" id="user-profile-form">
               <div class="row row-condensed">
                   <label class="text-right col-sm-3" for="user_first_name">
                     First Name
@@ -70,11 +70,11 @@
         <label class="text-right col-sm-3" for="user_birthdate">
           Birth Date <i class="icon icon-lock icon-ebisu" data-behavior="tooltip" title="Private"></i>
         </label>
-        <div class="col-sm-9">
+        <div class="col-sm-4">
           
   <fieldset>
           <div class="select pt-1">
-            <select aria-label="Month" id="user_birthdate_month" name="user[birthdate(2i)]">
+            <select aria-label="Month" id="user_birthdate_month" class="form-control cvcv3" name="user[birthdate(2i)]">
               <option value="">Month</option>
               <option value="January">January</option>
               <option value="February">February</option>
@@ -92,7 +92,7 @@
 
           </div>
           <div class="select pt-1">
-            <select aria-label="Day" id="user_birthdate_day" name="user[birthdate(3i)]">
+            <select aria-label="Day" class="form-control cvcv3" id="user_birthdate_day" name="user[birthdate(3i)]">
 <option value="">Day</option>
 
 <?php for($cnt=1;$cnt<32;$cnt++){ ?>
@@ -102,7 +102,7 @@
 
           </div>
           <div class="select pt-1">
-            <select aria-label="Year" id="user_birthdate_year" name="user[birthdate(1i)]">
+            <select aria-label="Year" class="form-control cvcv3" id="user_birthdate_year" name="user[birthdate(1i)]">
               <option value="">Year</option>
               <?php for($cnt=1917;$cnt<2000;$cnt++){ ?>
               <option value="<?php echo ($cnt); ?>"><?php echo ($cnt); ?></option>

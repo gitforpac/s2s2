@@ -6,11 +6,6 @@
 //////////                ////////////
 //////////////////////////////////////
 
-Route::get('/logout/redirecttwo', function(){
-        if (!Auth::guard('user')->check()) {
-            return redirect('/');
-        }
-});
 Route::view('/logout/redirect', 'logout');
 Route::view('/donebooking/redirect', 'donebooking');
 Route::group(['prefix' => 'superadmin'], function () {

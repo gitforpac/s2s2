@@ -85,7 +85,7 @@ class AdventurerController extends Controller
     {
         $client = User::findorFail($id);
 
-        $client->name = $request->input('name');
+        $client->user_fullname = $request->input('name');
         $client->email = $request->input('email');
         $client->birthdate = $request->input('birthdate');
         $client->gender = $request->input('gender');

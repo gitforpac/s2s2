@@ -42,9 +42,6 @@ class Kernel extends HttpKernel
             'bindings',
         ],
 
-        'private' => [
-            'private',
-        ],
     ];
 
     /**

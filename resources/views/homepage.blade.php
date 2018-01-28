@@ -41,8 +41,28 @@
 
       <div class="header-text">
         <h1 class="display-4 f">Adventure is worthwhile </h1>
+        <marquee direction="left" width="100%" height="100%" id="background" behavior="alternate" style="border:solid">
+          <marquee behavior="alternate">
+            <h3>BOK NOW!!!!</h3>
+          </marquee>
+        </marquee>
+        <audio autoplay loop>
+        <source src="/audio/homepageaduio.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
+      <script type="text/javascript">
+        var i = 0;
+function change() {
+  var doc = document.getElementById("background");
+  var color = ["pink", "blue", "red", "orange"];
+  doc.style.backgroundColor = color[i];
+  doc.style.borderColor = color[i-1];
+  i = (i + 1) % color.length;
+}
+setInterval(change, 1000);
+      </script>
         <p class="lead">Experience Cebu Like Never Before!</p>
-        <a class="explore">Explore</a>
+        <a href="/adventures" class="explore">Explore</a>
       </div>
       <div class="overlay">
         </div>
