@@ -19,28 +19,19 @@
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/css/lightgallery.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/lightgallery.css">
+        <link rel="stylesheet" type="text/css" href="/css/animate.css">
         <link rel="stylesheet" type="text/css" href="/css/datepicker.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/jquery-confirm.css">
         <link rel="stylesheet" type="text/css" href="/css/loaders.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
         <link rel="stylesheet" type="text/css" href="/css/snackbar.min.css">
-        <script
-          src="https://code.jquery.com/jquery-3.2.1.min.js"
-          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-          crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            Pace.on('done', function() {
-                $('.loader-overlay').fadeOut();
-                $('.content-wrapper').fadeIn();
-            });
-        </script>
+        <script type="text/javascript" src="/js/rl.js"></script>
 </head>
     <body>
-    <div class="loader-overlay"><div class="ball-scale-ripple-multiple t"><div></div><span class="load-text">Please Wait...</span></div></div>
+    <div class="loader-overlay"><div class="ball-scale-ripple-multiple t"><div></div><span class="load-text">Loading...</span></div></div>
     <div class="content-wrapper">
     <div class="ftft">
     @include('inc.navbar')  
@@ -87,9 +78,10 @@
     @if(Auth::guard('admin')->check())
       <a href="/crew/dashboard" class="btn btn-primary btd"><i class="fa fa-arrow-left" style="color: #fff;"></i> Back to Dashboard</a>
    @endif
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery-confirm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
     <script type="text/javascript" src="/js/jquery.form.min.js"></script>
     <script type="text/javascript" src="/js/infobubble.js"></script>

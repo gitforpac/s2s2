@@ -113,7 +113,7 @@
                 <div class="commentor">
                   <img src="/storage/user_avatars/{{$c->avatar}}">
                   <div class="review-s1">
-                    <h3 style="">{{$c->user_fullname}}</h3>
+                    <a href="/user/{{$c->id}}"><h3 style="">{{$c->user_fullname}}</h3></a>
                   </div>
                 </div>
                   <div class="comment">

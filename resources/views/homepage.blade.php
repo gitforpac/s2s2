@@ -67,10 +67,9 @@
                   </div>
                   <a href="/adventure/{{$p->pid}}"> <img class="card-img-top" src="/storage/cover_images/{{$p->thumb_img}}"></a>
                   <div class="card-body">
-                    <a href="/adventure/1"><h5 class="card-title adv-name">{{$p->name}}</h5></a>
+                    <a href="/adventure/{{$p->pid}}"><h5 class="card-title adv-name">{{$p->name}}</h5></a>
                     <i class="fa fa-compass" ></i> <span class="location-s">{{$p->location}}</span> <br>
-                    <i class="fa fa-tag"></i> {{$p->price_per}}
-                    <a href="/adventure/1" class="btn-sm btn-view-adv">View This Adventure</a>
+                    <i class="fa fa-tag"></i> {{number_format($p->price_per)}}
                   </div>
                 </div>
               </div>
@@ -185,12 +184,19 @@
   @include('inc.footer')
   <script src="/js/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
+<<<<<<< HEAD
+=======
+  <script src="/js/bootstrap.min.js"></script>
+>>>>>>> b5ed1bd7c05c79bde7af43cdb049bb4f8fa3a8b8
   <script type="text/javascript" src="/js/snackbar.min.js"></script>
   <script type="text/javascript" src="/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="/js/jquery-confirm.min.js"></script>
   <script type="text/javascript" src="/js/l.js"></script>
   <script type="text/javascript" src="/js/jquery-ui.js"></script>
+<<<<<<< HEAD
   <script src="/js/bootstrap.min.js"></script>
+=======
+>>>>>>> b5ed1bd7c05c79bde7af43cdb049bb4f8fa3a8b8
   <script type="text/javascript" src="/js/featured.js"></script>
 </body>
 </html>
