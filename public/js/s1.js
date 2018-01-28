@@ -130,7 +130,7 @@ success: function(data) {
 		$('html,body').animate({scrollTop:0},500);
 	} else if (data.success == true) {
 		Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Booking Created Successfully', pos: 'bottom-right' });
-		window.location.href = "/donebooking/redirects";
+		window.location.href = "/donebooking/redirect";
 	} else {
 		Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem while booking adventure', pos: 'bottom-right',duration:5000 });
 		$.alert('There was an internal problem');

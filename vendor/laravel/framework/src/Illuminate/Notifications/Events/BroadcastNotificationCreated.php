@@ -4,6 +4,7 @@ namespace Illuminate\Notifications\Events;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
@@ -60,7 +61,7 @@ class BroadcastNotificationCreated implements ShouldBroadcast
             return $channels;
         }
 
-        return [new PrivateChannel($this->channelName())];
+        return [new Channel($this->channelName())];
     }
 
     /**

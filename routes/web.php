@@ -6,8 +6,13 @@
 //////////                ////////////
 //////////////////////////////////////
 
+Route::get('/logout/redirecttwo', function(){
+        if (!Auth::guard('user')->check()) {
+            return redirect('/');
+        }
+});
 Route::view('/logout/redirect', 'logout');
-Route::view('/donebooking/redirect', 'logout');
+Route::view('/donebooking/redirect', 'donebooking');
 Route::group(['prefix' => 'superadmin'], function () {
   Route::get('/login', 'SuperadminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'SuperadminAuth\LoginController@login');
@@ -48,7 +53,7 @@ Auth::routes();
 //////////                ///////////////
 /////////////////////////////////////////
 
-Route::group(['middleware' => ['admin']], function () {
+Route::group(['middleware' => ['admin', 'private']], function () {
     Route::get('/crew/dashboard', 'ManagersController@dashboard');
     Route::get('/crew/manage', 'ManagersController@manage');
     Route::post('/addpackage', 'ManagersController@addpackage');
@@ -106,7 +111,7 @@ Route::group(['middleware' => ['admin']], function () {
 //////////                ///////////////
 /////////////////////////////////////////
 
-Route::group(['middleware' => ['user']], function () {
+Route::group(['middleware' => ['user','private']], function () {
     Route::resource('adventurer','AdventurerController');
     Route::view('/dashboard', 'Adventurer.dashboard',['title' => 'Dashboard']);
     Route::view('/trips', 'Adventurer.trips',['title' => 'Trips']);

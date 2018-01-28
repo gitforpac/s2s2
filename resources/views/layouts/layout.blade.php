@@ -40,7 +40,9 @@
     @include('inc.registerform')
     @include('inc.loginform')
     </div>
-    <a class="btn btn-primary btd">Back to Dashboard</a>
+    @if(Auth::guard('admin')->check())
+    <a href="/crew/dashboard" class="btn btd"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+    @endif
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/snackbar.min.js"></script>
     <script type="text/javascript" src="/js/jquery-confirm.min.js"></script>

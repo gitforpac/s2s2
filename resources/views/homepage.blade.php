@@ -178,7 +178,7 @@
   @include('inc.registerform')
   @include('inc.loginform')
    @if(Auth::guard('admin')->check())
-   <a href="/crew/dashboard" class="btn btn-primary btd"><i class="fa fa-arrow-left" style="color: #fff;"></i> Back to Dashboard</a>
+   <a href="/crew/dashboard" class="btn btd"><i class="fa fa-arrow-left" style="color: #fff;"></i> Back to Dashboard</a>
    @endif
   </div>
   @include('inc.footer')
