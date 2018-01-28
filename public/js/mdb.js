@@ -19,14 +19,7 @@
 	              data: {_token : _token },
 	              success: function(response) {
 	              		if(response.success == true) {
-		              			$.alert({
-				                		title: 'Booking Cancelled',
-									    content: 'You have cancelled a booking',
-									    type: 'green',
-									    typeAnimated: true,
-				                	})
-			      
-			                	is.remove();
+		              			location.reload();
 			                } else {
 			                	$.alert({
 			                		title: 'Encountered an error!',
@@ -53,19 +46,20 @@
 
 
 	$(document).on('click', '#modifybkbtn', function(e){
-
+		var count = $(this).data('count');
 		if($(this).data('flag') == 0) {
-			$('.form-loading').show();
+			$('.loader-'+count).show();
 			$(this).data('flag',1);
 			var id = $(this).data('pid');
 			var bid = $(this).data('id');
 			$.get('/schedules/'+id+'/'+bid, function(res) {
-					$('#modify-available-schedules').hide().html(res).slideToggle();
-					$('.form-loading').hide();
+					$('.acw').find('#modify-available-schedules-'+count).hide().html(res).slideToggle();
+					$('.loader-'+count).hide();
 			});
 		} else {
 			$(this).data('flag',0);
-			$('#modify-available-schedules').slideToggle().html('');
+
+			$('.acw').find('#modify-available-schedules-'+count).slideToggle().html('');
 
 		}
 		

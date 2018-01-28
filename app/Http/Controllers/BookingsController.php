@@ -60,7 +60,7 @@ class BookingsController extends Controller
             $b->paid = $request->total_paid;
 
             
-            $s->schedule_status = 1;
+            $s->schedule_status = '1';
             $ss = $s->save();
 
             $saved = $b->save();
@@ -96,7 +96,7 @@ class BookingsController extends Controller
                 $b->payment_method = 'Credit Card';
                 $b->paid = $request->total_paid;
 
-                $s->schedule_status = 1;
+                $s->schedule_status = '1';
                 $ss = $s->save();
 
                 $saved = $b->save();
@@ -204,12 +204,24 @@ class BookingsController extends Controller
      {
         $booking = Booking::find($bid);
 
+        $s = Schedule::find($booking->schedule_id);
+
         $booking->status = 'cancelled';
+
+        $s->schedule_status = '0';
 
         $saved = $booking->save();
 
-        return Response::json(['success' => $saved]);
-    }
+        $s->save();
+
+        if($saved && $saved2) {
+            return Response::json(['success' => $saved]);
+        } else {
+            return Response::json(['success' => false]);
+            }
+        }
+
+        
 
 
     public function calculatePayment($price,Request $request)
