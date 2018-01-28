@@ -6,10 +6,12 @@
 //////////                ////////////
 //////////////////////////////////////
 
+Route::view('/logout/redirect', 'logout');
 Route::group(['prefix' => 'superadmin'], function () {
   Route::get('/login', 'SuperadminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'SuperadminAuth\LoginController@login');
   Route::post('/logout', 'SuperadminAuth\LoginController@logout')->name('logout');
+
 
   // Route::get('/register', 'SuperadminAuth\RegisterController@showRegistrationForm')->name('register');
   // Route::post('/register', 'SuperadminAuth\RegisterController@register');
