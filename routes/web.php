@@ -11,7 +11,7 @@ Route::group(['prefix' => 'superadmin'], function () {
   Route::post('/login', 'SuperadminAuth\LoginController@login');
   Route::post('/logout', 'SuperadminAuth\LoginController@logout')->name('logout');
 
-  //Route::get('/register', 'SuperadminAuth\RegisterController@showRegistrationForm')->name('register');
+  // Route::get('/register', 'SuperadminAuth\RegisterController@showRegistrationForm')->name('register');
   // Route::post('/register', 'SuperadminAuth\RegisterController@register');
 
   Route::post('/password/email', 'SuperadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
@@ -175,29 +175,33 @@ Route::group(['prefix' => 'superadmin'], function () { // 'middleware' => ['supe
     Route::post('/addadventurer','SuperAdminController@addAccountUser');
     Route::post('/addadmin','SuperAdminController@addAccountAdmin');
     Route::get('/editadventurer/{id}', 'SuperAdminController@EditAdventurer');
+
+    
     Route::get('/editcrew/{id}', 'SuperAdminController@EditCrew');
+    Route::get('/getcrewaccount/{id}', 'SuperAdminController@getcrewaccount');
+    Route::post('/editcrewaccount/{id}', 'SuperAdminController@editcrewaccount');
     //sa crew
     Route::view('/dashboard', 'superadmin.dashboard',['title' => 'Dashboard']);
     Route::get('/manage', 'SuperAdminController@manage');
-    Route::view('/add', 'superadmin.addpackage');
-    Route::post('/addpackage', 'SuperAdminController@addpackage');
-    Route::post('/additem/{pid}','SuperAdminController@addIncluded');
-    Route::post('/deleteitem/{iid}','SuperAdminController@deleteIncluded');
-    Route::get('/editpkg/{pid}', 'SuperAdminController@update');
-    Route::post('/addschedule/{pid}','SuperAdminController@addSchedule');
-    Route::post('/deleteschedule/{sid}','SuperAdminController@deleteSchedule');
-    Route::post('/upload/{pid}','SuperAdminController@upload');
-    Route::post('/deletephoto/{pid}','SuperAdminController@deletePhoto');
-    Route::post('/addvideo/{pid}','SuperAdminController@addVideo');
-    Route::post('/deletevideo/{id}','SuperAdminController@deleteVideo');
-    Route::post('/updatedetails/{pid}', 'SuperAdminController@updatepackage');  
-    Route::get('/getbookings/{pid}','SuperAdminController@packageBookings');
-    Route::delete('/deletepackage/{pid}', 'SuperAdminController@deletepackage');
-    Route::post('/updateitinerary/{pid}','SuperAdminController@updateItinerary');
-    Route::post('/addcontent/{pid}','SuperAdminController@addContent');
-    Route::post('/deletecontent/{pid}','SuperAdminController@deleteContent');
-    Route::post('/addadventuretype','SuperAdminController@addadventureType');
-    Route::get('/manage-my-crew','SuperAdminController@manageCrew');
+    // Route::view('/add', 'superadmin.addpackage');
+    // Route::post('/addpackage', 'SuperAdminController@addpackage');
+    // Route::post('/additem/{pid}','SuperAdminController@addIncluded');
+    // Route::post('/deleteitem/{iid}','SuperAdminController@deleteIncluded');
+    // Route::get('/editpkg/{pid}', 'SuperAdminController@update');
+    // Route::post('/addschedule/{pid}','SuperAdminController@addSchedule');
+    // Route::post('/deleteschedule/{sid}','SuperAdminController@deleteSchedule');
+    // Route::post('/upload/{pid}','SuperAdminController@upload');
+    // Route::post('/deletephoto/{pid}','SuperAdminController@deletePhoto');
+    // Route::post('/addvideo/{pid}','SuperAdminController@addVideo');
+    // Route::post('/deletevideo/{id}','SuperAdminController@deleteVideo');
+    // Route::post('/updatedetails/{pid}', 'SuperAdminController@updatepackage');  
+    // Route::get('/getbookings/{pid}','SuperAdminController@packageBookings');
+    // Route::delete('/deletepackage/{pid}', 'SuperAdminController@deletepackage');
+    // Route::post('/updateitinerary/{pid}','SuperAdminController@updateItinerary');
+    // Route::post('/addcontent/{pid}','SuperAdminController@addContent');
+    // Route::post('/deletecontent/{pid}','SuperAdminController@deleteContent');
+    // Route::post('/addadventuretype','SuperAdminController@addadventureType');
+    // Route::get('/manage-my-crew','SuperAdminController@manageCrew');
 
 });
 

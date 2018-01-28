@@ -6,6 +6,9 @@
 </div>
 <div >
     <div class="col-sm-8">
+      @if(Session::has('crewaccount'))
+      <h5 class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('crewaccount') }}</h5>
+      @endif
       <button type="button" class="btn-success shadow-black btn" data-toggle="modal" data-target="#accountmodal">
         <i class="fa fa-plus pr-5"></i> Create Accout</button>
     </div>
@@ -17,6 +20,7 @@
   @else
     <tr>
       <th>#</th>
+      <th>Name</th>
       <th>Email</th>
       <th>Username</th>
       <th>Action</th>
@@ -24,10 +28,11 @@
      @foreach($m as $b)
     <tr>
        <th scope="row">{{$loop->iteration}}</th>
+       <td>{{$b->name}}</td>
         <td>{{$b->email}}</td>
         <td>{{$b->username}}</td>
         <td>
-          <a href="javascript:void(0)" id="view-p" data-name="{{$b->name}}" data-username="{{$b->username}}" data-email="{{$b->email}}" class="btn-sm btn-primary" data-toggle="modal" data-target="#profile"><i class="fa fa-edit"></i> Edit</a>
+          <a href="javascript:void(0)" id="view-p" data-id="{{$b->id}}" class="btn-sm btn-primary" data-toggle="modal" data-target="#profile"><i class="fa fa-edit"></i> Edit</a>
           <a href="javascript:void(0)" id="rcab" class="btn-sm btn-danger" data-id="{{$b->id}}"><i class="fa fa-user-times"></i> Deactivate</a>
         </td>
     </tr>
@@ -81,7 +86,7 @@
     <div class="modal-dialog">
       <div class="modal-content modal-md">
         <div class="modal-header">
-          <h1>Edit Profile</h1>
+          <h5>Edit Account</h5>
            <hr>
       <!-- left column -->
       <!-- edit form column -->
@@ -89,32 +94,40 @@
         
         <h3>Account Details</h3>
         
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" method="POST" role="form" id="edit-crew-account-form">
+          {{csrf_field()}}
           <div class="form-group">
             <label class="col-lg-3 control-label">Name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" id="edit-name" value="">
+              <input class="form-control" name="editname" type="text" id="editname">
             </div>
           </div>
           
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" id="edit-email" value="">
+              <input class="form-control" name="editemail" type="text" id="editemail">
             </div>
           </div>
          
           <div class="form-group">
             <label class="col-lg-3 control-label">Username:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" id="edit-username" value="">
+              <input class="form-control" name="editusername"  type="text" id="editusername">
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label class="col-lg-3 control-label">Password:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="editpassword" type="password" id="editpassword" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
-              <input type="button" class="btn btn-primary" value="Save Changes">
+              <input type="submit" class="btn btn-primary" value="Save Changes">
               <span></span>
               <button class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>

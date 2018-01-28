@@ -9,14 +9,16 @@ success: function(res) {
 });
 
 $(document).on('click','#view-p',function(){
-var name = $(this).data('name');
-var username = $(this).data('username');
-var email = $(this).data('email');
+  var id = $(this).data('id');
 
-$('#edit-account').modal('show')
-  ('#edit-name').val(name);
-  ('#edit-email').val(username);
-  ('#edit-username').val(email);
+  $.get('/superadmin/getcrewaccount/'+id,function(res){
+    $('#editname').val(res.name);
+    $('#editusername').val(res.username);
+    $('#editemail').val(res.email);
+    $('#edit-account').modal('show');
+    $('#edit-crew-account-form').attr('action','/superadmin/editcrewaccount/'+id)
+  });
+
 });
 
 $(document).on('click','a#rcab',function(e) {
