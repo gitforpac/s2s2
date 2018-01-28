@@ -130,7 +130,7 @@ success: function(data) {
 		$('html,body').animate({scrollTop:0},500);
 	} else if (data.success == true) {
 		Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Booking Created Successfully', pos: 'bottom-right' });
-		window.location.href = "/myadventures";
+		window.location.href = "/donebooking/redirects";
 	} else {
 		Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem while booking adventure', pos: 'bottom-right',duration:5000 });
 		$.alert('There was an internal problem');
@@ -147,6 +147,7 @@ $(document).on('change','#select_payment_method',function() {
 
 	if($(this).val() == 'Deposit') {
 		$('.selected-option').slideToggle().html('');
+		$('input[name=total_paid]').val('') 	
 	} else if($(this).val() == 'Credit Card') {
 		$('.selected-option').html(cc).slideToggle();
 	} else {

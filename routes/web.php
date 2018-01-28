@@ -7,6 +7,7 @@
 //////////////////////////////////////
 
 Route::view('/logout/redirect', 'logout');
+Route::view('/donebooking/redirect', 'logout');
 Route::group(['prefix' => 'superadmin'], function () {
   Route::get('/login', 'SuperadminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'SuperadminAuth\LoginController@login');
