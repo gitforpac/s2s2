@@ -6,13 +6,13 @@
       <a href="/adventures" class="nav-link">Adventures</a>
     </li>
     <li class="navbar-item">
-      <a href="/theteam" class="nav-link">CrewMembers</a>
+      <a href="/theteam" class="nav-link">Crew Members</a>
     </li>
     <li class="navbar-item">
-      <a href="/about-us" class="nav-link">About us</a>
+      <a href="/about-us" class="nav-link">About Us</a>
     </li>
     <li class="navbar-item">
-      <a href="/contact-us" class="nav-link">Contact us</a>
+      <a href="/contact-us" class="nav-link">Contact Us</a>
     </li>
     @if(Auth::guard('user')->check())
      <li class="nav-item dropdown">
@@ -20,6 +20,8 @@
         <img src="/storage/user_avatars/{{Auth::guard('user')->user()->avatar}}" class="da">
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
+        
+        <a class="dropdown-item" href="/user/{{Auth::guard('user')->id()}}"><i class="fa fa-qq"></i> &nbsp;View Profile</a>
         <a class="dropdown-item" href="/adventurer/{{Auth::guard('user')->id()}}/edit"><i class="fa fa-user"></i> &nbsp;Edit Profile</a>
          <a class="dropdown-item" href="/myadventures"><i class="fa fa-address-book" aria-hidden="true"></i> &nbsp;Booked Adventures</a>
         <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> &nbsp;Account Settings</a>

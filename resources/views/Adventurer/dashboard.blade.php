@@ -4,12 +4,9 @@
   <div class="user-wrapper">
     <div class="profile-div">  
       <div class="card" style="width: 100%;">
-        <img class="card-img-top" src="{{ asset('img/da.jpg') }}" alt="Card image cap">
+        <img class="card-img-top" src="/storage/user_avatars/{{Auth::guard('user')->user()->avatar}}"" alt="Card image cap">
         <div class="card-body text-center">
-          <h2></h2>
-         
-          <a href="/myprofile" style="margin-bottom: 160px;">View Profile</a><br>
-          <a href="/adventurer/{{Auth::guard('user')->id()}}/edit">Edit Profile</a>
+          <h4>{{Auth::guard('user')->user()->user_fullname}}</h4>
         </div>
       </div>
     </div>  

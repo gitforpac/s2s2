@@ -183,14 +183,15 @@
    @endif
   </div>
   @include('inc.footer')
-  <script src="/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/js/snackbar.min.js"></script>
   <script src="/js/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
+  <script type="text/javascript" src="/js/snackbar.min.js"></script>
   <script type="text/javascript" src="/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="/js/jquery-confirm.min.js"></script>
   <script type="text/javascript" src="/js/l.js"></script>
   <script type="text/javascript" src="/js/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/featured.js"></script>
 </body>
 </html>
+

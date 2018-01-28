@@ -33,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = "/";
 
     /**
      * Create a new controller instance.
@@ -84,7 +84,7 @@ class LoginController extends Controller
 
         if ($findUser) {
             $this->guard()->login($findUser);    
-            return redirect('/dashboard');
+            return redirect("/user/".$findUser->id);
 
         } else {
             $u = new User;
@@ -99,7 +99,7 @@ class LoginController extends Controller
             $u->save();
             $userlogin = User::where('email',$user->email)->first();
             $this->guard()->login($userlogin);
-            return redirect('/dashboard');
+            return redirect("/user/".$u->id);
     }
     }
 

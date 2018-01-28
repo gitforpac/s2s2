@@ -14,8 +14,9 @@ class PagesController extends Controller
 
 	public function contactus()
     {
-    	$c = ContactUs::find(1)->first();
-
     	return view('pages.contact-us')->with('c',$c);
+    	// $c = ContactUs::find(1)->first();
+
+    	// return view('pages.contact-us')->with('c',$c);
 	}
 }
