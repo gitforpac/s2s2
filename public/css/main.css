@@ -49,7 +49,7 @@ input {
 	color: #484848 !important;
 	text-align: center;
 	position: relative;
-	left: -44px;
+	left: -29px;
 	top: 55px;
 	font-family: 'Lato', sans-serif;
 	font-weight: 800;
@@ -1938,7 +1938,12 @@ h3.c-header {
 	padding-left: 15px;
 	padding-top: 10px;
 	padding-bottom: 12px;
-	color: rgba(0,0,0,.6);
+	color: rgba(0,0,0,.6) !important;
+}
+
+
+#hnav a.dropdown-item {
+	color: rgba(0,0,0,.6) !important;
 }
 
 .dropdown {

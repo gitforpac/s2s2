@@ -45,7 +45,7 @@ Package and Bookings
           <a href="javascript:void(0)" class="btn-sm btn-info mpw" id="viewbookingsbtn" data-id="{{$bk->pid}}">
             View Bookings
           </a>
-          <a href="/editpkg/{{$bk->id}}/" class="btn-sm btn-primary mpw">Edit Package</a>
+          <a href="/editpkg/{{$bk->pid}}/" class="btn-sm btn-primary mpw">Edit Package</a>
           <a href="javascript:void(0)" class="btn-sm btn-danger mpw" id="deletepkgbtn" data-id="{{$bk->pid}}">Delete Package</a>
         </td>
     </tr>

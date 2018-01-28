@@ -20,7 +20,7 @@
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/lightgallery.css">
-        <link rel="stylesheet" type="text/css" href="/js/animate.css">
+        <link rel="stylesheet" type="text/css" href="/css/animate.css">
         <link rel="stylesheet" type="text/css" href="/css/datepicker.min.css">
         <link rel="stylesheet" type="text/css" href="/css/jquery-confirm.css">
         <link rel="stylesheet" type="text/css" href="/css/loaders.css">

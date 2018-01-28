@@ -59,7 +59,7 @@
 	      url: '/changeavatar',
 	      data: fd,
 	      success: function(data) {
-	      	$('span.avatar').html('<img class="img-responsive user-avatar" src="/storage/user_avatars/'+data.avatar+'">')
+	      	location.reload();
 	      },
 	      contentType: false,
 	      processData: false,
