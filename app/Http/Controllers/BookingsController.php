@@ -57,6 +57,7 @@ class BookingsController extends Controller
             $b->payment = $request->total_payment;
             $b->schedule_id = $request->schedule;
             $b->payment_method = 'Deposit';
+            $b->paid = $request->total_paid;
 
             
             $s->schedule_status = 1;
@@ -93,6 +94,7 @@ class BookingsController extends Controller
                 $b->payment = $request->total_payment;
                 $b->schedule_id = $request->schedule;
                 $b->payment_method = 'Credit Card';
+                $b->paid = $request->total_paid;
 
                 $s->schedule_status = 1;
                 $ss = $s->save();
@@ -222,7 +224,7 @@ class BookingsController extends Controller
     public function getPrices($pid,Request $request)
     {
 
-        Package::find($pid)->prices;
+        $p = Package::find($pid);
 
         $count = $request->client_count;
 
@@ -230,8 +232,31 @@ class BookingsController extends Controller
                         ->where('package_id',$pid)
                         ->get();
 
+        if($p->discount !== NULL || $p->discount > 0) {
 
-        return Response::json(['per' => number_format($total->first()->price_per,2),'total'=>round(($total->first()->person_count*$total->first()->price_per*$this->bookingfee),0)]); 
+            return Response::json(['per' => number_format($total->first()->price_per,2),
+                'total'=>round(($total->first()->person_count*$total->first()->price_per),0)]);
+
+        }
+
+        if($request->paymentoption == 'Booking Fee') {
+
+            return Response::json([
+                'per' => number_format($total->first()->price_per,2),
+                'total'=>round(($total->first()->person_count*$total->first()->price_per*$this->bookingfee),0),
+                'tp' => round(($total->first()->person_count*$total->first()->price_per),0)
+            ]);
+
+        } elseif($request->paymentoption == 'Full Payment') {
+
+            return Response::json([
+                'per' => number_format($total->first()->price_per,2),
+                'total'=>round(($total->first()->person_count*$total->first()->price_per),0),
+                'tp' => round(($total->first()->person_count*$total->first()->price_per),0),
+            ]); 
+        }
+
+        
 
     }
 

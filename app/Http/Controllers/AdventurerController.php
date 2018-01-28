@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use Carbon\Carbon;
 use Hash;
 use App\Comment;
 use Response;
@@ -214,11 +215,23 @@ class AdventurerController extends Controller
                                          ->join('schedules', 'schedules.id' ,'=','bookings.schedule_id')
                                          ->join('packages' ,'packages.id','=','bookings.package_id')             
                                          ->where(['client' => Auth::guard('user')->user()->id])
+                                         ->where('schedules.date', '>=', Carbon::now())
                                          ->whereNotIn('status', ['cancelled'])
                                          ->get();
+
+        $prevbookings = DB::table('bookings')->selectRaw('bookings.schedule_id,bookings.package_id,bookings.num_guest,bookings.id,packages.thumb_img,packages.name,schedules.date , packages.id as pid, schedules.id as sid')
+                                         ->join('schedules', 'schedules.id' ,'=','bookings.schedule_id')
+                                         ->join('packages' ,'packages.id','=','bookings.package_id')             
+                                         ->where(['client' => Auth::guard('user')->user()->id])
+                                         ->where('schedules.date', '<', Carbon::now())
+                                         ->whereNotIn('status', ['cancelled'])
+                                         ->get();
+
         $data = array(
             'bookings' => $bookings,
-            'title' => $title
+            'title' => $title,
+            'prevbookings' => $prevbookings,
+            'now' => Carbon::now()
         );
 
         return view('Adventurer.trips')->with('pagedata',$data);

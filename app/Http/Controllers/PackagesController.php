@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use App\Booking;
 use App\Schedule;
 use App\Package;
@@ -115,11 +116,16 @@ class PackagesController extends Controller
     public function loadPackage($pid)
     {
         $package = Package::find($pid);
-        $schedules = Package::find($pid)->schedules;
+        $schedules = DB::table('schedules')
+                        ->whereDate('schedules.date', '>', Carbon::now())
+                        ->where('package_id', '=', $pid)
+                        ->whereNull('schedules.deleted_at')
+                        ->get();
+                        
         $includeds = Package::find($pid)->includeds; 
         $images = Package::find($pid)->images;
         $content = Package::find($pid)->contents;
-        $comments = DB::table('comments')->select('comment','user_fullname')
+        $comments = DB::table('comments')->select('comment','user_fullname','avatar')
                                          ->join('users','users.id','=','comments.user_id')
                                          ->where(['comments.package_id' => $pid])
                                          ->get();

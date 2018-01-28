@@ -24,6 +24,8 @@ a {
 }
 
 
+
+
 .featured2 {
     text-align: center;
     padding: 0px;
@@ -713,6 +715,16 @@ span.register-bday {
 	 ###    //LOGIN   ###
 	 ####################
 */
+
+button.mybtn1 {
+	margin-top: 5px;
+	color: #fff;
+	background-color: #652E33;
+	border-color: #652E33;
+	cursor: pointer;
+	border-radius: 0px !important;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
 #register-form .modal-content{
 	background: none;
 	border: none;

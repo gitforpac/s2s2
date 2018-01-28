@@ -33,7 +33,7 @@
 </div>
 <script type="text/javascript">
   $(document).on('click','#mmb-btn', function(e){
-    Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Changing Schedule...', pos: 'bottom-right',duration:15000 });
+    Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Changing schedule...', pos: 'bottom-right',duration:15000 });
     var bid = $(this).data('bid');
     var sid = $(this).data('sid');
     e.preventDefault();

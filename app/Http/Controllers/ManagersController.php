@@ -24,7 +24,6 @@ use App\Prices;
 use Response;
 use App\ContactUs;
 use App\SuperAdmin;
-
 use Auth;
 use View;
 
@@ -513,7 +512,10 @@ class ManagersController extends Controller
     public function update($pid)
     {
         $package = Package::find($pid);
-        $schedules = Package::find($pid)->schedules;
+        $schedules = DB::table('schedules')
+                        ->where('schedules.date', '>', Carbon::now())
+                        ->whereNull('deleted_at')
+                        ->get();
         $includes = Package::find($pid)->includeds;
         $videos = Package::find($pid)->videos;
         $images = Package::find($pid)->images;
@@ -667,6 +669,7 @@ class ManagersController extends Controller
                 ->leftJoin('users','users.id','=','bookings.client')
                 ->leftJoin('packages','packages.id','=','bookings.package_id')
                 ->orderBy('schedules.date', 'asc')
+                ->whereNull('schedules.deleted_at')
                 ->where('schedules.date', '<', Carbon::now()->addDays(30))
                 ->get();
 
@@ -746,6 +749,7 @@ class ManagersController extends Controller
                 ->leftJoin('users','users.id','=','bookings.client')
                 ->leftJoin('packages','packages.id','=','bookings.package_id')
                 ->orderBy('schedules.date', 'asc')
+                ->whereNull('schedules.deleted_at')
                 ->whereDate('schedules.date', '<', Carbon::now())
                 ->get();
 

@@ -28,13 +28,29 @@
 
 					<h5 class="pd-h">Payment:</h5>
 					<div class="form-group">
+						<label class="control-label pd-h" for="cn">Payment Option</label>
+							<div class="form-check" style="padding-left: 30px;">
+							  <input class="form-check-input" type="radio" name="paymentoption" id="paymentoptionfp" value="Full Payment" checked>
+							  <label class="form-check-label" for="exampleRadios1">
+							    Full Payment
+							  </label>
+							</div>
+							<div class="form-check" style="padding-left: 30px;">
+							  <input class="form-check-input" type="radio" name="paymentoption" id="paymentoptionbf" value="Booking Fee">
+							  <label class="form-check-label" for="exampleRadios2">
+							   Pay only booking fee
+							  </label>
+							</div>
+					</div>
+					<br>					
+					<div class="form-group">
 						<label class="control-label pd-h" for="cn">Preferred Payment Method</label>
 							<select class="form-control col-md-4 cvcv" name="select_payment_method" id="select_payment_method" required>
 								<option value="Credit Card" selected>Credit Card</option>
 								<option value="Deposit">Deposit</option>
 							</select>
 					</div>
-
+				
 					<br>
 
 					<div class="selected-option">
@@ -59,6 +75,7 @@
 					</div>
 			  	<input type="hidden" name="schedule" value="{{$pagedata['schedule']->id}}">
 			  	<input type="hidden" name="total_payment" value="{{$pagedata['prices']->price_per}}">
+			  	<input type="hidden" name="total_paid" value="{{$pagedata['prices']->price_per}}">
 			  	<input type="hidden" name="guest" value="1">
 			  	
 			</div>
@@ -93,7 +110,7 @@
 			<input type="submit" name="book" id="book-btn" value="Book this Adventure" class="btn bg-sb text-white" style="margin-top: 50px;float: right;margin-right: 40px;"> 
 			</form>
 	</div>
-		<div class="col" style="background-color: #f1f2ef; height: 240px; margin-top: 10px;">
+		<div class="col" style="background-color: #f1f2ef; height: 260px; margin-top: 10px;">
 			<div class="detail-wrap">
               	<h3 class="sb-name">{{$pagedata['package']->name}}</h3>
              	<h5 class="loc-header">Talamban </h5> 
@@ -105,16 +122,17 @@
 
 			              		<span class="numag" style="display:inline-block;position: relative !important;top: 1px;left: 3px; font-size: 16px;">x1 <i class="fa fa-users"></i></span>
 
-			              		<div style="font-size: 16px;margin-top: 10px;"><small>20% of Total Payment is the booking fee</small>*</div>
-
-	              		
-
-       
-
+			              		<div style="font-size: 16px;margin-top: 20px;"><small>20% of Total Payment is the booking fee</small>*<br>
+			              		<div style="margin-top:15px;margin-left: -1px" id="tp"><strong>Total Payment: ₱{{number_format($pagedata['prices']->price_per,0)}}.00<span class="sb-currency">PHP</span></strong></div>
+			              		</div>			             
+			              		<br>
 			</div>
 			<div class="total">
-				<h5 class="tp"> Booking Payment:</h5>
-              	<h5 class="p-price"> ₱ {{number_format($pagedata['prices']->price_per*0.20,0)}}.00<span class="sb-currency">PHP</span></h5> 
+				<h5 class="tp"> To Pay:</h5>
+				<span class="form-loading" style="display: none;min-height: 30px !important;height:30px;padding: 0px!important;margin: 0px !important" >
+	              <img src="{{ asset('img/loader-white.svg') }}" style="min-height: 30px !important;height:30px;padding: 0px!important;margin: 0px !important">
+	            </span>
+              	<h5 class="p-price"> ₱ {{number_format($pagedata['prices']->price_per,0)}}.00<span class="sb-currency">PHP</span></h5> 
           	</div>
 		</div>
 	</div>

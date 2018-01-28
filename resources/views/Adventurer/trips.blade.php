@@ -39,6 +39,46 @@
 </div>
 @endforeach
 @endif
+<br>
+<br>
+<hr>
+@if($pagedata['prevbookings']->isEmpty())
+<h5></h5>
+@else
+<h5 class="prevbookings">Previous Bookings</h5>
+@foreach($pagedata['prevbookings'] as $d)
+<div class="row">
+<div class="col-md-8 col-sm-12">
+  <div class="card n612">
+	  <h5 class="card-header bgb text-white">{{$d->name}}</h5>
+	  <div class="card-body">
+	    <div class="row">
+	    	<div class="col-md-4">
+	    		<img src="/storage/cover_images/{{$d->thumb_img}}" style="width: 100%;height: 180px;border-radius: 2px;">
+	    	</div>
+	    	<div class="col-md-8">
+	    		<h5 class="bh">{{$d->name}}</h5>
+	    		<p><i class="fa fa-calendar"></i> {{date('M d, Y, D', strtotime($d->date))}}</p>
+	    		<p><i class="fa fa-user-o"></i> {{$d->num_guest}} Adventurer(s)</p>
+	    	</div>
+	    </div>
+	    <br>
+	    <div class="row">
+	    	<div class="col-md-12" >
+	    		<div class="form-loading text-center" style="display: none;">
+	              <img src="{{ asset('img/loader.svg') }}">
+	            </div>
+	            <div id="modify-available-schedules">
+	            </div>
+	    	</div>
+	    </div>
+	  </div>
+	</div>
+	</div>
+</div>
+@endforeach
+@endif
+
 </div>
 @endsection
 @section('utils')

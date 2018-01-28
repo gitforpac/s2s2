@@ -1,4 +1,12 @@
 
+.prevbookings {
+	margin-top: 15px;
+	margin-bottom: -30px;
+	font-size: 18px;
+}
+.bgb {
+	background-color: #D27049;
+}
 
 .btd {
 	position: absolute;
@@ -1058,7 +1066,7 @@ a.nav-link {
 	position: absolute;
 	left: 0;
 	width: 100%;
-	bottom: -60px;
+	bottom: -85px;
 	min-height: 84px;
 }
 

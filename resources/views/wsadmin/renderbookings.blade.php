@@ -16,6 +16,7 @@
  
         <th>Booked By</th>
         <th>Total Payment</th>
+        <th>Paid</th>
         <th>Number of Clients</th>
         <th>Contact Number</th>
         <th>Contact Email</th>
@@ -27,6 +28,7 @@
       <tr>
         <td>{{$bk->user_fullname}}</td>
         <td>₱ {{number_format($bk->payment)}}</td>
+        <td>₱ {{number_format($bk->paid)}}</td>
         <td>{{$bk->num_guest}}</td>
         <td>{{$bk->phone}}</td>
         <td>{{$bk->email}}</td>

@@ -1,12 +1,42 @@
 
 
+var option = 'Full Payment';
+
+$(document).on('change','input[type=radio][name=paymentoption]',function(){
+$('.form-loading').show();
+option = $(this).val();
+$('.total .p-price').html('');
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
 
 
+$.ajax({
+url: "/paymentg/"+pid,
+type: 'POST',
+cache: false,
+data: {client_count: adventurercount,paymentoption: option},
+success: function(html){
+$('.form-loading').hide();
+$("#book-btn").prop('disabled', false);
+$(document).find('.snackbar-container').animate({
+opacity: 0,});
+$('input[name="total_payment"]').val(html.total);
+var total = html.total;
+var tp = html.tp;
+$('.total .p-price').html('₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'.00<span class="sb-currency">PHP</span>');
+$('.numag').html(html.per+' PHP x '+adventurercount+' person(s) <i class="fa fa-users"></i>');
+$('#tp').html('<strong>Total Payment: ₱'+tp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'.00<span class="sb-currency">PHP</span></strong>')
+$('input[name="guest"]').val(parseInt(adventurercount));
+}
+});
+});
 
 $(document).on('change','#adultguest',function(){
-Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Processing Request...', pos: 'bottom-right' });
 adventurercount = parseInt($(this).val());
-$("#book-btn").prop('disabled', true);
+$('.form-loading').show();
 $('.total .p-price').html('');
 $.ajaxSetup({
 headers: {
@@ -18,15 +48,19 @@ $.ajax({
 url: "/paymentg/"+pid,
 type: 'POST',
 cache: false,
-data: {client_count: adventurercount},
+data: {client_count: adventurercount,paymentoption: option},
 success: function(html){
+$('.form-loading').hide();
 $("#book-btn").prop('disabled', false);
 $(document).find('.snackbar-container').animate({
 opacity: 0,});
-$('input[name="total_payment"]').val(html.total);
+$('input[name="total_payment"]').val(html.tp);
+$('input[name="total_paid"]').val(html.total);
 var total = html.total;
+var tp = html.tp;
 $('.total .p-price').html('₱'+total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'.00<span class="sb-currency">PHP</span>');
 $('.numag').html(html.per+' PHP x '+adventurercount+' person(s) <i class="fa fa-users"></i>');
+$('#tp').html('<strong>Total Payment: ₱'+tp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'.00<span class="sb-currency">PHP</span></strong>')
 $('input[name="guest"]').val(parseInt(adventurercount));
 }
 });
@@ -116,7 +150,7 @@ $(document).on('change','#select_payment_method',function() {
 	} else if($(this).val() == 'Credit Card') {
 		$('.selected-option').html(cc).slideToggle();
 	} else {
-		alert('sad')
+		alert('error select')
 	}
 })
 
