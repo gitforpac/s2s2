@@ -34,7 +34,7 @@
          
         <div class="form-check">
         <label class="form-check-label">
-            <input type="checkbox" class="form-check-input">
+            <input type="checkbox" class="form-check-input" name="remember">
         <small>Remember Me</small>
         </label>
         <button type="submit" class="btn btn-block mybtn1" id="loginbtn" style="margin-top: 5px;">Login</button>

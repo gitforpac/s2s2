@@ -1,6 +1,7 @@
 @extends('wsadmin.crewlayout')
 @section('content')
 <section class="content-header">
+
     <h1>
       Add Package
       <small>create package</small>
@@ -10,6 +11,12 @@
       <li class="active">Add Package</li>
     </ol>
   </section>
+<br>
+<div class="alert alert-danger" id="errors-div" style="display: none;">
+    <ul id="errors-ul">
+
+    </ul>
+</div>
 <section class="content">
 <div class="row">
 <div class="page home-page">
@@ -19,14 +26,14 @@
           <div class="form-group row">
             <label class="col-sm-2">Package Name</label>
             <div class="col-md-8">
-              <input name="package_name" type="text" placeholder="Name of Adventure" class="form-control form-control-success"required>
+              <input name="package_name" type="text" placeholder="Name of Adventure" class="form-control form-control-success"  value="{{ old('package_name') }}">
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-2">Location</label>
             <div class="col-md-8">
-               <input name="package_location" type="text" id="us2-address" class="form-control" required/>
+               <input name="package_location" type="text" id="us2-address" class="form-control" required  value="{{ old('package_location') }}"/>
             </div>
           </div>
 
@@ -35,15 +42,15 @@
                <div class="col-md-4">
                   <select class="form-control" id="package_durnum" name="package_durnum" required="">
                     <@for($i=1;$i<=32;$i++)
-                    <option value="{{$i}}">{{$i}}</option>
+                    <option value="{{$i}}" @if(old('package_durnum') == $i) {{ 'selected' }} @endif>{{$i}}</option>
                     @endfor
                   </select>
                 </div>
                 <div class="col-md-4">
                   <select class="form-control" id="package_dur" name="package_dur" required="">
-                    <option value="Hours">Hours</option>
-                    <option value="Days">Days</option>
-                    <option value="Months">Months</option>
+                    <option value="Hours" @if(old('package_dur') == 'Hours') {{ 'selected' }} @endif>Hours</option>
+                    <option value="Days" @if(old('package_dur') == 'Days') {{ 'selected' }} @endif>Days</option>
+                    <option value="Months" @if(old('package_dur') == 'Months') {{ 'selected' }} @endif>Months</option>
                   </select>
                 </div>
             </div>
@@ -52,8 +59,9 @@
                <label class="col-sm-2">Adventure Type</label>
                <div class="col-md-8">
                   <select class="form-control" id="package_type" name="package_type" required="">
+                    <option disabled selected>Type of Adventure</option>
                     @foreach($adv_type as $at)
-                    <option value="{{$at->type}}">{{$at->type}}</option>
+                    <option value="{{$at->type}}" @if(old('package_type') == $at->type) {{ 'selected' }} @endif>{{$at->type}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -62,10 +70,10 @@
             <div class="form-group row" style="margin-top: 20px;">
                <label class="col-sm-2">Max Adventurers</label>
                <div class="col-md-8">
-                  <select class="form-control" id="package_limit" name="package_limit" required="">
+                  <select class="form-control" id="max_adventurers" name="package_limit" required="">
                     <option disabled selected>Number of Max Adventurers for this package</option>
                     <@for($i=1;$i<=32;$i++)
-                    <option value="{{$i}}">{{$i}}</option>
+                    <option value="{{$i}}" @if(old('package_limit') == $i) {{ 'selected' }} @endif>{{$i}}</option>
                     @endfor
                   </select>
                   <br>
@@ -78,15 +86,15 @@
             <label class="col-sm-2">Difficulty</label>
             <div class="col-md-6">
                <label class="form-check-label" style="margin-right: 20px;">
-          <input class="form-check-input" type="radio" name="package_difficulty" id="df1" value="easy" checked>
+          <input class="form-check-input" type="radio" name="package_difficulty" id="df1" value="easy" checked  {{ old('package_difficulty')=="easy" ? 'checked='.'"'.'checked'.'"' : ''}}>
           Easy
         </label>
                <label class="form-check-label" style="margin-right: 20px;">
-          <input class="form-check-input" type="radio" name="package_difficulty" id="df2" value="medium">
+          <input class="form-check-input" type="radio" name="package_difficulty" id="df2" value="moderate" {{ old('package_difficulty')=="moderate" ? 'checked='.'"'.'checked'.'"' : ''}}>
           Medium
         </label>
               <label class="form-check-label" style="margin-right: 20px;">
-          <input class="form-check-input" type="radio" name="package_difficulty" id="df3" value="hard">
+          <input class="form-check-input" type="radio" name="package_difficulty" id="df3" value="hard" {{ old('package_difficulty')=="hard" ? 'checked='.'"'.'checked'.'"' : ''}}>
           Hard
         </label>
             </div>
@@ -96,7 +104,7 @@
             <label class="col-sm-2">Introduction</label>
             <div class="col-md-8">
               <textarea name="package_dsc" class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required=""></textarea>
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required=""  value="{{ old('package_dsc') }}"> {{ old('package_dsc') }}</textarea>
             </div>
           </div> 
 
@@ -104,13 +112,13 @@
             <label class="col-sm-2">Itinerary</label>
             <div class="col-md-10" style="padding-left: 12px;">
               <textarea name="package_itinerary" class="textarea" placeholder="Write awesome Introduction for the package"
-                style="margin-right: 10px; width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required=""></textarea>
+                style="margin-right: 10px; width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required="" value="{{ old('package_itinerary') }}">{{old('package_itinerary') }}</textarea>
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-2">Cover Photo</label>
-              <input type="file" name="package_image" style="padding-left: 12px;" />
+              <input type="file" name="package_image" style="padding-left: 12px;" required="" />
           </div>   
           <div class="form-group row">
             <label class="col-sm-2">Map Location</label>
@@ -173,7 +181,7 @@ google.maps.event.addListener(map,'click',function(event){
   } 
 }
 
-$('#package_limit').change(function() {
+$('#max_adventurers').change(function() {
         var prices = '<label class="col-sm-12">Prices per Person</label><div class="col-md-8">';
 
         for(var i=1; i<=$(this).val(); i ++) {
@@ -182,5 +190,22 @@ $('#package_limit').change(function() {
         prices += '</div>';
         $('.pricesdiv').html(prices);
     })
+
+$('#basic-details').ajaxForm({
+  success: function(res) {
+    var err = res.error;
+    var html = '';
+    if(res.error) {
+      err.forEach(function(e) {
+        html += '<li>'+e+'</li>';
+      });
+      $('#errors-ul').html(html);
+      $('#errors-div').show();
+      $('html, body').animate({
+          scrollTop: $('#errors-ul').offset().top
+    }, 500);
+    }
+  }
+});
 </script>
 @endsection

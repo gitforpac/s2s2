@@ -98,6 +98,9 @@ Route::group(['middleware' => ['admin', 'private']], function () {
     Route::view('/upload', 'crew.upload');
     Route::post('/up/{pid}', 'ManagersController@upload');
     Route::get('/updatepackage/{pid}', 'ManagersController@update');
+
+    Route::get('/crew/changeprofile', 'ManagersController@changeprofileview');
+    Route::post('/crew/updateprofile', 'ManagersController@updatadmineprofile');
 });
 
 //////////////////////////////////////////

@@ -6,7 +6,7 @@
       <a href="/adventures" class="nav-link">Adventures</a>
     </li>
     <li class="navbar-item">
-      <a href="/theteam" class="nav-link">CrewMembers</a>
+      <a href="/theteam" class="nav-link">Crew</a>
     </li>
     <li class="navbar-item">
       <a href="/about-us" class="nav-link">About us</a>

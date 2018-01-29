@@ -1,4 +1,37 @@
 
+.av-wrap input[type="file"] {
+  position: absolute;
+  font-size: 50px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.cb {
+    background-color: #41B7C4;
+    border: 1px solid #41B7C4;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.user-u-b {
+    position: relative;
+    padding: 8px 12px;
+    margin: auto;
+}
+.av-wrap {
+    margin: 0 auto;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 55px !important;
+}
+
+.av {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    text-align: center;
+}
 
 .mpw {
     display: inline-block;

@@ -38,13 +38,13 @@ return [
     'facebook' => [
     'client_id' => '158115108265046',
     'client_secret' => '917733a26bbffc066cd3ab7fc94c2c22',
-    'redirect' => 'http://localhost:8000/login/facebook/callback',
+    'redirect' => 'http://pac-latagaw.com/login/facebook/callback',
     ],
 
     'google' => [
     'client_id' => '847124853894-06hkc2viqpgbhm5a95ipsa303413eqg0.apps.googleusercontent.com',
     'client_secret' => 'q-7hpCqHB6GVRc8z78YAabk2',
-    'redirect' => 'http://localhost:8000/login/google/callback',
+    'redirect' => 'http://pac-latagaw.com/login/google/callback',
     ],
 
 ];

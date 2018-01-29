@@ -18,9 +18,6 @@
   <li class="nav-item">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos" aria-selected="false">Videos</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" id="itinerary-tabw" data-toggle="tab" href="#itinerary" role="tab" aria-controls="itinerary" aria-selected="false">Itinerary</a>
-  </li>
 </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -29,7 +26,7 @@
           <div class="col-md-8">
             <div class="detail-wrap">
               <h5 class="pd-h">Introduction</h5>
-              <span style="padding-right: 15px;">{!!$pagedata['package']->description!!}</span>
+              <p>{!!$pagedata['package']->description!!}</p>
             </div>
             <div class="detail-wrap">
               <h5 class="pd-h">what's Included?</h5>
@@ -61,6 +58,11 @@
                     </tr>
                   </tbody>
                 </table>
+
+              <div class="detail-wrap" id="itinerary">
+                <h5 class="pd-h">Itinerary</h5>
+                <p>{!!$pagedata['package']->itinerary!!}</p>
+              </div>
               
             </div>
             <div class="detail-wrap">
@@ -136,13 +138,14 @@
               </div>
             </div>
           </div>
-          <div class="col" style="background-color: #f1f2ef; height: 225px; margin-top: 10px;">
+          <div class="col" style="background-color: #f1f2ef; height: 285px; margin-top: 10px;">
             <div class="detail-wrap">
               <h3 class="sb-name">{{$pagedata['package']->name}}</h3>
               <h5 class="loc-header">{{$pagedata['package']->location}} </h5>   
               <h5 class="p-price"> ₱{{number_format($pagedata['prices']->last()->price_per)}}<span class="sb-currency">PHP</span></h5>
               <span class="sb-pp">per person</span>
               <a href="#avd" class="sb-checkdates"><i class="fa fa-calendar-check-o"></i> &nbsp;Check Available Dates</a>
+              <a href="#itinerary" class="sb-checkdates d"><i class="fa fa-map-o"></i> &nbsp;View Adventure Itinerary</a>
               <span class="sb-c text-center">You may want to view our <a href="#">Cancellation Policy </a></span>
             </div>
           </div>
@@ -193,9 +196,6 @@
           @endif      
         </ul>
       </div>
-    </div>
-    <div class="tab-pane fade" id="itinerary" role="tabpanel" aria-labelledby="itinerary-tab">
-    	<div class="detail-wrap">{!!$pagedata['package']->itinerary!!}</div> 
     </div>
   </div>
 </div>

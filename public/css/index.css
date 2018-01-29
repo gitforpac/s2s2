@@ -1,4 +1,8 @@
 
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,300);
+body{
+    font-family: 'Quicksand', sans-serif;
+}
 
 #hnav .dropdown-menu {
 	border-radius: 0px;
@@ -80,6 +84,7 @@ a {
     text-align: center;
     padding: 0px;
     color: #333;
+    font-size: 38px;
 }
 
 #fp .col-md-4 {
@@ -129,9 +134,9 @@ a {
 	color: #484848 !important;
 	text-align: center;
 	position: relative;
-	left: -29px;
+	left: -31px;
 	top: 55px;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Quicksand', sans-serif;
 	font-weight: 800;
 }
 
@@ -140,7 +145,7 @@ a {
 	top: 0;
 	left: 0;
 	z-index: 10;
-	background-color: #e8eaef;
+	background-color: #edeeef;
 	width: 100%;
 	height: 100%;
 }
@@ -241,7 +246,7 @@ a {
 .lead {
 	font-size: 1.5em;
 	margin-bottom: 60px;
-	font-family: cursive;
+	font-family: Georgia;
 	color: #fff;
 }
 
@@ -446,6 +451,7 @@ div.next {
 	margin-top: 80px;
 	margin-bottom: 0px;
 	font-size: 38px;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 

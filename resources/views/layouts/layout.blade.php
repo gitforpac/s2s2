@@ -15,7 +15,6 @@
         <!-- Fonts -->
         <link rel="shortcut icon" href="{{asset('img/pac_logo_icon.ico')}}">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">

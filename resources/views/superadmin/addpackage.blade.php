@@ -1,6 +1,16 @@
 @extends('superadmin.adminlayout')
 @section('content')
 <section class="content-header">
+@if ($errors->any())
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+@endif
+
     <h1>
       Add Package
       <small>create package</small>
@@ -19,7 +29,7 @@
           <div class="form-group row">
             <label class="col-sm-2">Package Name</label>
             <div class="col-md-8">
-              <input name="package_name" type="text" placeholder="Name of Adventure" class="form-control form-control-success"required>
+              <input name="package_name" type="text" placeholder="Name of Adventure  sss" class="form-control form-control-success">
             </div>
           </div>
 
@@ -131,21 +141,5 @@
 @endsection
 
 @section('utils')
-<script type="text/javascript" src='http://maps.google.com/maps/api/js?key=AIzaSyCAf7Sp7l4TuDL-x1MCdF3cCB6vHuc29dU&sensor=false&libraries=places'></script>>
 
-<script>
-    $('#amap').locationpicker({
-        location: {
-            latitude: 10.3403,
-            longitude: 123.9416
-        },
-         radius: 0,
-        inputBinding: {
-            latitudeInput: $('#lat'),
-            longitudeInput: $('#lng'),
-            locationNameInput: $('#us2-address')
-        },
-         enableAutocomplete: true
-    });
-</script>
 @endsection
