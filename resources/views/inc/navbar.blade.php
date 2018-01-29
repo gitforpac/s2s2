@@ -22,7 +22,6 @@
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
         <a class="dropdown-item" href="/adventurer/{{Auth::guard('user')->id()}}/edit"><i class="fa fa-user"></i> &nbsp;Edit Profile</a>
          <a class="dropdown-item" href="/myadventures"><i class="fa fa-address-book" aria-hidden="true"></i> &nbsp;Booked Adventures</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> &nbsp;Account Settings</a>
         <a href="{{ route('logout') }}" class="dropdown-item" 
                   onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">

@@ -43,11 +43,11 @@ $('form#login-modal-form').submit(function(e){
 $('#registerform').ajaxForm({
   dataType: 'json',
   beforeSubmit: function() {
-    $(this).prop('disabled', true);
+    $('#regbtn').prop('disabled', true);
     Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Creating Account...', pos: 'bottom-right',duration:15000 });
   },
   success: function(res) {
-    $(this).prop('disabled', false);
+    $('#regbtn').prop('disabled', true);
     if(res == true) {
     Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Account Created Successfully', pos: 'bottom-right' });
      location.reload(); 

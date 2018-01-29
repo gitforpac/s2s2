@@ -44,30 +44,52 @@ class ManagersController extends Controller
 
     public function upload($pid,Request $request)
     {
+
+        $validator = Validator::make(
+        $request->all(), [
+        'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+            ],[
+                'images.*.required' => 'Please upload an image',
+                'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+                'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return Response::json(array('success' => false));
+        } else {
+
         $data = array();
-        
-        if($request->hasFile('images')){
-            foreach($request->file('images') as $f) {
 
-                $fileNameExt = $f->getClientOriginalName();
+            if($request->hasFile('images')){
+                foreach($request->file('images') as $f) {
 
-                $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
+                    $fileNameExt = $f->getClientOriginalName();
 
-                $ext = $f->getClientOriginalExtension();
+                    $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
 
-                $storedFileName = $filename.'_'.time().'.'.$ext;
+                    $ext = $f->getClientOriginalExtension();
 
-                array_push($data,array('package_id'=>$pid,'imagename'=>$storedFileName,'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=> date('Y-m-d H:i:s')));
+                    $storedFileName = $filename.'_'.time().'.'.$ext;
 
-                $path = $f->storeAs('public/images', $storedFileName);
+                    array_push($data,array('package_id'=>$pid,'imagename'=>$storedFileName,'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=> date('Y-m-d H:i:s')));
+
+                    $path = $f->storeAs('public/images', $storedFileName);
+                }
+
+            DB::table('package_images')->insert($data);
             }
 
-        DB::table('package_images')->insert($data);
+            $images = Package::find($pid)->images;
+            
+            return Response::json(view('wsadmin.renderimages')->with('images',$images)->render() );
+
         }
 
-        $images = Package::find($pid)->images;
+
+
         
-        return Response::json(view('wsadmin.renderimages')->with('images',$images)->render() );
     }
 
 
