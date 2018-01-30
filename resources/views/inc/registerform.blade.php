@@ -72,7 +72,7 @@
         <br>
         <div class="form-check">
 
-      <button type="submit" class="btn btn-block mybtn1 regbtn" style="margin-top: 5px;">
+      <button type="submit" class="btn btn-block mybtn1 regbtn" id="regbtn" style="margin-top: 5px;">
         Register Account
     </button>
   </div>

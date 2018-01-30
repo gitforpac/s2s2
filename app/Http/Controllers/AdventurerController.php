@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Hash;
 use App\Comment;
@@ -85,7 +86,7 @@ class AdventurerController extends Controller
     {
         $client = User::findorFail($id);
 
-        $client->name = $request->input('name');
+        $client->user_fullname = $request->input('name');
         $client->email = $request->input('email');
         $client->birthdate = $request->input('birthdate');
         $client->gender = $request->input('gender');
@@ -174,7 +175,18 @@ class AdventurerController extends Controller
 
     public function updateAvatar(Request $request)
     {
-        if($request->hasFile('user-avatar')){
+
+        $validator = Validator::make(
+        $request->all(), [
+        'user-avatar' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return Response::json(array('success' => false));
+        } else {
+
+            if($request->hasFile('user-avatar')){
             $fileNameExt = $request->file('user-avatar')->getClientOriginalName();
             $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
             $ext = $request->file('user-avatar')->getClientOriginalExtension();
@@ -190,7 +202,10 @@ class AdventurerController extends Controller
 
             return Response::json(array('success' => $saved,'avatar' => $u->avatar));  
 
+            }
+
         }
+        
     }
 
 

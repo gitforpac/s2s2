@@ -4,7 +4,6 @@
 @endsection
 @section('content')
 <div class="jumbotron re">
-  <h1 class="display-4">Hello, world!</h1>
   <iframe class="locmap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.9073646907405!2d123.91112971434616!3d10.349291892612206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a998901b771ce7%3A0xb845a95c27f22d0a!2sGov.+M.+Cuenco+Ave%2C+Cebu+City%2C+Cebu!5e0!3m2!1sen!2sph!4v1515920035050" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
 </div>
 
@@ -13,7 +12,7 @@
   <div class="row">
     <div class="container w-100">
       <div class="col text-center p-3">
-        <h1 class="text-success">SAY HELLO</h1>
+        <h1 style="color: #D27049">SAY HELLO</h1>
         <p>Got some suggestions? Have a few questions? We’re ready for them. Get busy!
 
 If you would like us to keep you on file, please email us at cebu@pac.com!</p>
@@ -68,7 +67,7 @@ If you would like us to keep you on file, please email us at cebu@pac.com!</p>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-success pull-right" id="btnContactUs">
+                        <button type="submit" class="btn pull-right" style="background-color: #903F39; color: #fff;" id="btnContactUs">
                             Send Message</button>
                     </div>
                 </div>
@@ -80,7 +79,9 @@ If you would like us to keep you on file, please email us at cebu@pac.com!</p>
             <legend><span class="fa fa-globe"></span> Where's our headquarters?</legend>
             <address>
                 <strong>Philippine Adventure Consultants</strong><br>
-                {{$c->contactdetails}}
+                <span>Talamban, Cebu City</span><br>
+                <span>PH +639 1235 512</span><br>
+                <span>pacadventures@gmail.com</span>
             </address>
             </form>
         </div>

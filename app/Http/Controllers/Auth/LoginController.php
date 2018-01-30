@@ -48,8 +48,9 @@ class LoginController extends Controller
      protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
+
         $this->clearLoginAttempts($request);
-        if ($request->ajax()) {
+        if ($request->ajax()) { 
             return response()->json(['authenticated' => true], 200);
         }
         return $this->authenticated($request, $this->guard()->user())

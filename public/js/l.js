@@ -3,6 +3,7 @@
 
 $('form#login-modal-form').submit(function(e){
 	e.preventDefault();
+  $('.mybtn1').prop('disabled',true);
 	Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Logging In...', pos: 'bottom-right' });
 	$.ajaxSetup({
       headers: {
@@ -15,15 +16,16 @@ $('form#login-modal-form').submit(function(e){
     	url: '/login',
     	data: {email: $('#email').val(),password:$('#password').val()},
     	success: function(res) {
-
     		if(res.authenticated == true) {
           Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Login success', pos: 'bottom-right' });
     			location.reload(); 
     		} else {
+          $('.mybtn1').prop('disabled',false);
           Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem logging in', pos: 'bottom-right',duration:5000 });
         }
     	},
     	error: function(xhr, textStatus, errorThrown) {
+        $('.mybtn1').prop('disabled',false);
     		$('#email').css('border','1px solid rgb(165, 0, 16)');
     		$('.error-box-login').html('<p class="was-error"><i class="fa fa-exclamation-triangle"></i>&nbsp;Invalid Credentials!</p>');
         Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem logging in', pos: 'bottom-right',duration:5000 });
@@ -41,11 +43,11 @@ $('form#login-modal-form').submit(function(e){
 $('#registerform').ajaxForm({
   dataType: 'json',
   beforeSubmit: function() {
-    $(this).prop('disabled', true);
+    $('#regbtn').prop('disabled', true);
     Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Creating Account...', pos: 'bottom-right',duration:15000 });
   },
   success: function(res) {
-    $(this).prop('disabled', false);
+    $('#regbtn').prop('disabled', true);
     if(res == true) {
     Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Account Created Successfully', pos: 'bottom-right' });
      location.reload(); 

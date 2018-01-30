@@ -59,7 +59,18 @@
 	      url: '/changeavatar',
 	      data: fd,
 	      success: function(data) {
-	      	location.reload();
+
+	      	if(data.success == false) {
+	      		$.alert({
+            		title: 'Invalid File Format',
+            		content: 'Please upload only images',
+				    type: 'red',
+				    typeAnimated: true,
+            	});
+	      	} else {
+	      		location.reload();
+	      		}
+	  	
 	      },
 	      contentType: false,
 	      processData: false,

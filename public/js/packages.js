@@ -127,7 +127,7 @@ $('[data-toggle="datepicker"]').datepicker({startDate:today});
     }
 
     var stateObj = { page: 3 };
-     window.history.pushtate(stateObj, "AdventureDate", "adventures"+url);
+     window.history.pushState(stateObj, "AdventureDate", "adventures"+url);
     $('.main-packages-wrapper').addClass('disabled-div');
     $.ajax({
       type:'GET',

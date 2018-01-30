@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\Package;
 use App\Booking;
@@ -43,30 +44,52 @@ class ManagersController extends Controller
 
     public function upload($pid,Request $request)
     {
+
+        $validator = Validator::make(
+        $request->all(), [
+        'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+            ],[
+                'images.*.required' => 'Please upload an image',
+                'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+                'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return Response::json(array('success' => false));
+        } else {
+
         $data = array();
-        
-        if($request->hasFile('images')){
-            foreach($request->file('images') as $f) {
 
-                $fileNameExt = $f->getClientOriginalName();
+            if($request->hasFile('images')){
+                foreach($request->file('images') as $f) {
 
-                $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
+                    $fileNameExt = $f->getClientOriginalName();
 
-                $ext = $f->getClientOriginalExtension();
+                    $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
 
-                $storedFileName = $filename.'_'.time().'.'.$ext;
+                    $ext = $f->getClientOriginalExtension();
 
-                array_push($data,array('package_id'=>$pid,'imagename'=>$storedFileName,'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=> date('Y-m-d H:i:s')));
+                    $storedFileName = $filename.'_'.time().'.'.$ext;
 
-                $path = $f->storeAs('public/images', $storedFileName);
+                    array_push($data,array('package_id'=>$pid,'imagename'=>$storedFileName,'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=> date('Y-m-d H:i:s')));
+
+                    $path = $f->storeAs('public/images', $storedFileName);
+                }
+
+            DB::table('package_images')->insert($data);
             }
 
-        DB::table('package_images')->insert($data);
+            $images = Package::find($pid)->images;
+            
+            return Response::json(view('wsadmin.renderimages')->with('images',$images)->render() );
+
         }
 
-        $images = Package::find($pid)->images;
+
+
         
-        return Response::json(view('wsadmin.renderimages')->with('images',$images)->render() );
     }
 
 
@@ -85,54 +108,78 @@ class ManagersController extends Controller
 
     public function addpackage(Request $request)
     {
-        
-        $fileNameExt = $request->file('package_image')->getClientOriginalName();
-        $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
-        $ext = $request->file('package_image')->getClientOriginalExtension();
-        $storedFileName = $filename.'_'.time().'.'.$ext;
-        $path =$request->file('package_image')->storeAs('public/cover_images', $storedFileName);
-        
+        $messages = [
+            'longitude.required' => 'Please point a location in the map',
+        ];
 
-        $package = new Package;
+        $validator = Validator::make($request->all(), [
+                'package_name' => 'required|max:255',
+                'package_location' => 'required|max:255',
+                'package_difficulty' => 'required',
+                'package_dsc' => 'required|max:255',
+                'longitude' => 'required|max:255',
+                'latitude' => 'required|max:255',
+                'package_type' => 'required',
+                'package_itinerary' => 'required',
+                'package_location' => 'required|max:255',
+                'package_image' => 'required',
+                'max_adventurers' => 'required',
+                'longitude' => 'required',
+            ], $messages);
 
-        $package->name =$request->package_name;
-        $package->location = $request->package_location;
-        $package->discount = (int)$request->discount/100;
-        $package->difficulty = $request->package_difficulty;
-        $package->description = $request->package_dsc;
-        $package->longitude = $request->longitude;
-        $package->latitude = $request->latitude;
-        $package->duration = $request->package_durnum . ' ' . $request->package_dur;
-        $package->adventure_type = $request->package_type;  
-        $package->adventurer_limit = $request->package_limit;  
-        $package->itinerary = $request->package_itinerary;
-        $package->thumb_img = $storedFileName;    
+        if($validator->fails()){
+            return response()->json(['error'=>$validator->errors()->all()]);
+        } else {
+             
+            $fileNameExt = $request->file('package_image')->getClientOriginalName();
+            $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
+            $ext = $request->file('package_image')->getClientOriginalExtension();
+            $storedFileName = $filename.'_'.time().'.'.$ext;
+            $path =$request->file('package_image')->storeAs('public/cover_images', $storedFileName);
+            
 
-        $saved = $package->save();
+            $package = new Package;
 
-        $pricesdata = array();
+            $package->name =$request->package_name;
+            $package->location = $request->package_location;
+            $package->discount = (int)$request->discount/100;
+            $package->difficulty = $request->package_difficulty;
+            $package->description = $request->package_dsc;
+            $package->longitude = $request->longitude;
+            $package->latitude = $request->latitude;
+            $package->duration = $request->package_durnum . ' ' . $request->package_dur;
+            $package->adventure_type = $request->package_type;  
+            $package->adventurer_limit = $request->max_adventurers;  
+            $package->itinerary = $request->package_itinerary;
+            $package->thumb_img = $storedFileName;    
 
-        for($i=1;$i<=$request->package_limit;$i++) {
-            $gett = 'price_for_'.(string)$i;
-            array_push($pricesdata, array('package_id'=>$package->id, 'price_per' => Input::get($gett), 'person_count' => $i));
-        }
+            $saved = $package->save();
 
-        
-        DB::table('prices')->insert($pricesdata);
+            $pricesdata = array();
 
-        $mp = Package::find($package->id)->prices;
+            for($i=1;$i<=$request->package_limit;$i++) {
+                $gett = 'price_for_'.(string)$i;
+                array_push($pricesdata, array('package_id'=>$package->id, 'price_per' => Input::get($gett), 'person_count' => $i));
+            }
 
-        $is_id = Prices::find($mp->last()->id);
+            
+            DB::table('prices')->insert($pricesdata);
 
-        $is_id->is_display = 1;
+            $mp = Package::find($package->id)->prices;
+
+            $is_id = Prices::find($mp->last()->id);
+
+            $is_id->is_display = 1;
 
 
-        $is_id->save();
+            $is_id->save();
 
 
-        if($saved) {
-            return redirect('/editpkg/'.$package->id)->with('createpackagesuccess','Creating Package Successful, You may now Edit information about this package');
-        }
+            if($saved) {
+                return redirect('/editpkg/'.$package->id)->with('createpackagesuccess','Creating Package Successful, You may now Edit information about this package');
+            }
+            }   
+           
 
     }
 
@@ -514,6 +561,7 @@ class ManagersController extends Controller
         $package = Package::find($pid);
         $schedules = DB::table('schedules')
                         ->where('schedules.date', '>', Carbon::now())
+                        ->where('package_id', $pid)
                         ->whereNull('deleted_at')
                         ->get();
         $includes = Package::find($pid)->includeds;
@@ -805,6 +853,41 @@ class ManagersController extends Controller
             ]);
         }
         
+    }
+
+
+    public function changeprofileview()
+    {
+        $u = Admin::find(Auth::guard('admin')->user()->id);
+
+        return view('wsadmin.editprofile')->with('user',$u);
+    }
+
+    public function updatadmineprofile(Request $request)
+    {
+        $u = Admin::find(Auth::guard('admin')->user()->id);
+
+        if($request->hasFile('avatar')) {
+
+            $fileNameExt = $request->avatar->getClientOriginalName();
+            $filename = pathinfo($fileNameExt,PATHINFO_FILENAME);
+            $ext = $request->avatar->getClientOriginalExtension();
+            $storedFileName = $filename.'_'.time().'.'.$ext;
+            $path = $request->avatar->storeAs('public/crew_avatars', $storedFileName);
+
+            $u->avatar = $request->$storedFileName;
+        }
+
+        $u->email = $request->editemail;
+        $u->name = $request->editname;
+
+        $saved = $u->save();
+
+        if($saved) {
+            return response()->json([
+                'success' => $saved,
+            ]);
+        }
     }
 
 

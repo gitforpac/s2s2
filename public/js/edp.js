@@ -240,10 +240,18 @@ $(function() {
 	        percent.html(percentVal);
 	    },
 	    success: function(data) {
-	        var percentVal = '100%';
-	        bar.width(percentVal);
-	        percent.html(percentVal);
-	        $('#photosga').find('div#upds').hide().html(data).fadeIn();
+	        
+	        if(data.success == false) {
+	        	$.alert({
+            		title: 'Invalid File Format',
+            		content: 'Pleas upload only images',
+				    type: 'red',
+				    typeAnimated: true,
+            	});
+	        } else {
+	        	$('#photosga').find('div#upds').hide().html(data).fadeIn();
+	        }
+	        
 	    },
 	}); 
 

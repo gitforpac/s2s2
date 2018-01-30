@@ -23,10 +23,10 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="/crew/manage"> Home Page</a></li>
-            <li><a href="/crew/add"> Adventures Page</a></li>
-            <li><a href="/crew/add"> About us Page</a></li>
-            <li><a href="/crew/add"> Contact us Page</a></li>
-            <li><a href="/crew/add"> The Crew Page</a></li>
+            <li><a href="/adventures"> Adventures Page</a></li>
+            <li><a href="/about-us"> About us Page</a></li>
+            <li><a href="/contact-us"> Contact us Page</a></li>
+            <li><a href="/theteam"> The Crew Page</a></li>
           </ul>
         </li>
         <li class="treeview">

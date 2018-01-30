@@ -6,7 +6,11 @@
       <a href="/adventures" class="nav-link">Adventures</a>
     </li>
     <li class="navbar-item">
+<<<<<<< HEAD
       <a href="/theteam" class="nav-link">Crew Members</a>
+=======
+      <a href="/theteam" class="nav-link">Crew</a>
+>>>>>>> a4ce248ead27467f2269962bd11d30a3c6fba5e6
     </li>
     <li class="navbar-item">
       <a href="/about-us" class="nav-link">About Us</a>
@@ -24,7 +28,6 @@
         <a class="dropdown-item" href="/user/{{Auth::guard('user')->id()}}"><i class="fa fa-qq"></i> &nbsp;View Profile</a>
         <a class="dropdown-item" href="/adventurer/{{Auth::guard('user')->id()}}/edit"><i class="fa fa-user"></i> &nbsp;Edit Profile</a>
          <a class="dropdown-item" href="/myadventures"><i class="fa fa-address-book" aria-hidden="true"></i> &nbsp;Booked Adventures</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> &nbsp;Account Settings</a>
         <a href="{{ route('logout') }}" class="dropdown-item" 
                   onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">

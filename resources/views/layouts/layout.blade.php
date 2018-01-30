@@ -15,7 +15,6 @@
         <!-- Fonts -->
         <link rel="shortcut icon" href="{{asset('img/pac_logo_icon.ico')}}">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
@@ -40,7 +39,13 @@
     @include('inc.registerform')
     @include('inc.loginform')
     </div>
+<<<<<<< HEAD
     
+=======
+    @if(Auth::guard('admin')->check())
+    <a href="/crew/dashboard" class="btn btd"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+    @endif
+>>>>>>> a4ce248ead27467f2269962bd11d30a3c6fba5e6
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/snackbar.min.js"></script>
     <script type="text/javascript" src="/js/jquery-confirm.min.js"></script>

@@ -7,15 +7,15 @@
 //////////////////////////////////////
 
 Route::view('/logout/redirect', 'logout');
-Route::view('/donebooking/redirect', 'logout');
+Route::view('/donebooking/redirect', 'donebooking');
 Route::group(['prefix' => 'superadmin'], function () {
   Route::get('/login', 'SuperadminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'SuperadminAuth\LoginController@login');
   Route::post('/logout', 'SuperadminAuth\LoginController@logout')->name('logout');
 
 
-  // Route::get('/register', 'SuperadminAuth\RegisterController@showRegistrationForm')->name('register');
-  // Route::post('/register', 'SuperadminAuth\RegisterController@register');
+   Route::get('/register', 'SuperadminAuth\RegisterController@showRegistrationForm')->name('register');
+   Route::post('/register', 'SuperadminAuth\RegisterController@register');
 
   Route::post('/password/email', 'SuperadminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
   Route::post('/password/reset', 'SuperadminAuth\ResetPasswordController@reset')->name('password.email');
@@ -28,8 +28,8 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/login', 'AdminAuth\LoginController@login');
   Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
 
-  //Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
-  //Route::post('/register', 'AdminAuth\RegisterController@register');
+  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'AdminAuth\RegisterController@register');
 
   Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
@@ -48,7 +48,7 @@ Auth::routes();
 //////////                ///////////////
 /////////////////////////////////////////
 
-Route::group(['middleware' => ['admin']], function () {
+Route::group(['middleware' => ['admin', 'private']], function () {
     Route::get('/crew/dashboard', 'ManagersController@dashboard');
     Route::get('/crew/manage', 'ManagersController@manage');
     Route::post('/addpackage', 'ManagersController@addpackage');
@@ -98,6 +98,9 @@ Route::group(['middleware' => ['admin']], function () {
     Route::view('/upload', 'crew.upload');
     Route::post('/up/{pid}', 'ManagersController@upload');
     Route::get('/updatepackage/{pid}', 'ManagersController@update');
+
+    Route::get('/crew/changeprofile', 'ManagersController@changeprofileview');
+    Route::post('/crew/updateprofile', 'ManagersController@updatadmineprofile');
 });
 
 //////////////////////////////////////////
@@ -106,7 +109,7 @@ Route::group(['middleware' => ['admin']], function () {
 //////////                ///////////////
 /////////////////////////////////////////
 
-Route::group(['middleware' => ['user']], function () {
+Route::group(['middleware' => ['user','private']], function () {
     Route::resource('adventurer','AdventurerController');
     Route::view('/dashboard', 'Adventurer.dashboard',['title' => 'Dashboard']);
     Route::view('/trips', 'Adventurer.trips',['title' => 'Trips']);

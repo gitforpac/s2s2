@@ -24,9 +24,9 @@
       
       
       @if(Auth::guard('user')->check())
-     <li class="nav-item dropdown" style="margin-left: 650px">
+     <li class="nav-item dropdown" style="position: absolute;right: 20px;top: 0px;">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src="/storage/user_avatars/{{Auth::guard('user')->user()->avatar}}" class="da">
+        <img src="/storage/user_avatars/{{Auth::guard('user')->user()->avatar}}" class="da" style="width: 50px;height: 50px;border: 1px solid #fff;">
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
         <a class="dropdown-item" href="/adventurer/{{Auth::guard('user')->id()}}/edit" style="color:rgba(0,0,0,0.6) !important;"><i class="fa fa-user"></i> &nbsp;Edit Profile</a>

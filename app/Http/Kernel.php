@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
     ];
 
     /**
@@ -51,6 +52,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'private' => \App\Http\Middleware\PrivateResponse::class,
         'superadmin' => \App\Http\Middleware\RedirectIfNotSuperadmin::class,
         'superadmin.guest' => \App\Http\Middleware\RedirectIfSuperadmin::class,
         'adventurer' => \App\Http\Middleware\RedirectIfNotAdventurer::class,

@@ -34,15 +34,37 @@
     <div class="v-header v-container">
      @include('inc.indexnav')
       <div class="full-screen">
-        <video src="/vids/teaser.mp4" autoplay="" muted loop=""></video>
+        <video id="teaservid" src="/vids/teaser.mp4" autoplay="" muted loop=""></video>
         <div class="overlay">
         </div>
       </div>
 
       <div class="header-text">
         <h1 class="display-4 f">Adventure is worthwhile </h1>
+        <marquee direction="left" width="100%" height="100%" id="background" behavior="alternate" style="border:solid">
+          <marquee behavior="alternate">
+            <h3>BOK NOW!!!!</h3>
+          </marquee>
+        </marquee>
+        <audio id="hayaanmosila" autoplay loop>
+        <source src="/audio/homepageaduio.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
+      <script type="text/javascript">
+        var i = 0;
+        var vid = document.getElementById("hayaanmosila");
+        vid.volume = 0.6;
+function change() {
+  var doc = document.getElementById("background");
+  var color = ["pink", "blue", "red", "orange"];
+  doc.style.backgroundColor = color[i];
+  doc.style.borderColor = color[i-1];
+  i = (i + 1) % color.length;
+}
+setInterval(change, 1000);
+      </script>
         <p class="lead">Experience Cebu Like Never Before!</p>
-        <a class="explore">Explore</a>
+        <a href="/adventures" class="explore">Explore</a>
       </div>
       <div class="overlay">
         </div>
@@ -82,55 +104,55 @@
     </section>
 
     <div class="container-fluid">
-    <header class="featured2"><h3>Go discover Cebu with us</h3></header>
+    <header class="featured-header text-center"><h3 style="font-family: 'Source Sans Pro', sans-serif !important;">Go discover Cebu with us</h3></header><br>
     <div class="row" id="fp">   
       <div class="col-md-4">
-        <div class="pwr" style="background: url('/img/1s.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
+        <div class="pwr" style="background: url('/img/3h.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
           <div class="title">
-            <h4 class="title-s">Oslob Diving</h4>
-            <a href="#" style="color:white;"><h5>View Details</h5></a>        
+            <h4 class="title-s">Diving</h4>
+            <a href="/adventures?type=diving" style="color:#fff;text-decoration: underline;"><h5>View Diving Adventures</h5></a>        
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="pwr" style="background: url('/img/2s.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
+        <div class="pwr" style="background: url('/img/2h.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
           <div class="title">
-            <h4 class="title-s">Talamban Trekking</h4>
-            <a href="#" style="color:white;"><h5>View Details</h5></a>        
+            <h4 class="title-s">Trekking</h4>
+            <a href="/adventures?type=trekking" style="color:#fff;text-decoration: underline;"><h5>View Trekking Adventures</h5></a>        
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="pwr" style="background: url('/img/3s.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
+        <div class="pwr" style="background: url('/img/1h.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
           <div class="title">
-            <h4 class="title-s">Badian Falls</h4>
-            <a href="#" style="color:white;"><h5>View Details</h5></a>        
+            <h4 class="title-s">Falls</h4>
+            <a href="/adventures?type=falls" style="color:#fff;text-decoration: underline;"><h5>View Falls Adventures</h5></a>        
           </div>
         </div>
       </div>
     </div>
     <div class="row" id="fp">   
       <div class="col-md-4">
-        <div class="pwr" style="background: url('/img/4s.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
-          <div class="title">
-            <h4 class="title-s">Mountaineering</h4>
-            <a href="#" style="color:white;"><h5>View Details</h5></a>        
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="pwr" style="background: url('/img/5s.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
-          <div class="title">
-            <h4 class="title-s">Cave Exploration</h4>
-            <a href="#" style="color:white;"><h5>View Details</h5></a>        
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="pwr" style="background: url('/img/6s.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
+        <div class="pwr" style="background: url('/img/4h.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
           <div class="title">
             <h4 class="title-s">Canyoneering</h4>
-            <a href="#" style="color:white;"><h5>View Details</h5></a>        
+            <a href="/adventures?type=canyoneering" style="color:#fff;text-decoration: underline;"><h5>View Canyoneering Adventures</h5></a>        
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pwr" style="background: url('/img/5h.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
+          <div class="title">
+            <h4 class="title-s">Day Tours</h4>
+            <a href="/adventures?type=day%20tour" style="color:#fff;text-decoration: underline;"><h5>View Day Tour Adventures</h5></a>     
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pwr" style="background: url('/img/6h.jpg');background-size: cover;background-repeat: no-repeat;background-position: center;">
+          <div class="title">
+            <h4 class="title-s">Parasailing</h4>
+            <a href="/adventures?type=parasailing" style="color:#fff;text-decoration: underline;"><h5>View Parasailing Adventures</h5></a>        
           </div>
         </div>
       </div>
@@ -141,21 +163,21 @@
     <section id="whyus">
       <div class="container">
         <div class="row">
-          <div class="col-sm" style="padding-left: 0px;padding-right: 40px;margin-right: 10px;">
+          <div class="col-sm" style="padding-left: 0px;padding-right: 40px;margin-right: 10px;font-family: 'Source Sans Pro', sans-serif !important;">
             <h5>BEST PRICE AND VALUE</h5>
             <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.</p>
           </div>
-          <div class="col-sm">
+          <div class="col-sm" style="font-family: 'Source Sans Pro', sans-serif !important;">
             <h5>WE VALUE SAFETY</h5>
             <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.</p>
           </div>
-          <div class="col-sm">
+          <div class="col-sm" style="font-family: 'Source Sans Pro', sans-serif !important;">
             <h5>SUPERIOR CUSTOMER SERVICE</h5>
             <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -166,7 +188,7 @@
       </div>
     </section>
     <section>
-      <div class="container-fluid text-center as">
+      <div class="container-fluid text-center as" style="font-family: 'Source Sans Pro', sans-serif !important;">
         <h3>Need help in your itinerary?</h3>
         <p>Email or call us to speak to one of our advisors who will help you with all of your holiday needs.</p>
         <p><strong>Office Hours:</strong> 8:00AM – 5PM (Monday-Saturday)</p>
@@ -178,7 +200,7 @@
   @include('inc.registerform')
   @include('inc.loginform')
    @if(Auth::guard('admin')->check())
-   <a href="/crew/dashboard" class="btn btn-primary btd"><i class="fa fa-arrow-left" style="color: #fff;"></i> Back to Dashboard</a>
+   <a href="/crew/dashboard" class="btn btd"><i class="fa fa-arrow-left" style="color: #fff;"></i> Back to Dashboard</a>
    @endif
   </div>
   @include('inc.footer')

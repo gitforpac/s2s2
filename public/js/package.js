@@ -10,6 +10,13 @@
   }, 500);
   });
 
+    $(document).on('click', 'a[href="#itinerary"]', function (event) {
+    event.preventDefault();
+    $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top-140
+  }, 500);
+  });
+
 
 $(document).ready(function(){
   $('.lightgallery').lightGallery({

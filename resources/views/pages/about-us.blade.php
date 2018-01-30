@@ -12,7 +12,7 @@
                 </div>
                    <div class="container"> 
                     <blockquote class="ts blockquote mt-10">
-                      <h1 class="text-center text-white" data-max-font-size="24px"  data-min-font-size="12px">"Life is either a daring adventure or nothing."</h1>
+                      <h1 class="text-center text-white">"Life is either a daring adventure or nothing."</h1>
                       
                       <p class="text-center text-white" data-max-font-size="24px"  data-min-font-size="12px">
                         - Kapitan Duay </p>
@@ -46,7 +46,7 @@
 
               <div class="col">
                  <div class="col text-center mb-2">
-                    <i class="sea fa fa-4x fa-group"> </i>
+                    <i class="sea fa fa-4x fa-group" style="color: #903F39"> </i>
                  </div>
                     <div class="col text-center">
                       <h2>Crews</h2>
@@ -57,7 +57,7 @@
 
                    <div class="col">
                  <div class="col text-center mb-2">
-                   <i class="sea fa fa-4x fa-compass"> </i>
+                   <i class="sea fa fa-4x fa-compass" style="color: #903F39"> </i>
                  </div>
                     <div class="col text-center">
                       <h2>Adventure Sites</h2>
@@ -68,7 +68,7 @@
 
                    <div class="col">
                  <div class="col text-center mb-2">
-                    <i class="sea fa fa-4x fa-qq"> </i>
+                    <i class="sea fa fa-4x fa-qq" style="color: #903F39"> </i>
                  </div>
                     <div class="col text-center">
                       <h2>Fellow Adventurers</h2>
@@ -89,7 +89,7 @@
 
 
 <!-- FOUNDERS -->
-<div class="bg-sea w-100">
+<div class="w-100" style="background-color: #dcefed;">
   <div class="row m-5 mb-3">
     
       <div class="col ml-5">
@@ -113,12 +113,12 @@
 
           <div class="col row p-3 ml-5">
               <div>
-                <img class="rounded-circle" src="{{ asset('img/user.png') }}"  width="150" height="150" alt="Jerwin Espina">
+                <img class="rounded-circle" src="{{ asset('img/saseng.jpg') }}"  width="150" height="150" alt="Jerwin Espina">
               </div>
               <div class="col mt-3">
                   <blockquote>
                       <cite>
-                        <h5>Kapitan Duay</h5>                   
+                        <h5>Rayseek Espinach</h5>                   
                         <label>CEO</label>
                       </cite>
                     <p>We’ve worked with a good handful of crews in our time, unlike Kap he sure knows what he's doing.</p>

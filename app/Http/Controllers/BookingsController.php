@@ -212,7 +212,7 @@ class BookingsController extends Controller
 
         $saved = $booking->save();
 
-        $s->save();
+        $saved2 = $s->save();
 
         if($saved && $saved2) {
             return Response::json(['success' => $saved]);
@@ -244,19 +244,20 @@ class BookingsController extends Controller
                         ->where('package_id',$pid)
                         ->get();
 
-        if($p->discount !== NULL || $p->discount > 0) {
+        // if($p->discount !== NULL && $p->discount > 0) {
 
-            return Response::json(['per' => number_format($total->first()->price_per,2),
-                'total'=>round(($total->first()->person_count*$total->first()->price_per),0)]);
+        //     return Response::json([
+        //         'per' => number_format($total->first()->price_per,2),
+        //         'total'=>($total->first()->person_count*$total->first()->price_per)]);
 
-        }
+        // }
 
         if($request->paymentoption == 'Booking Fee') {
 
             return Response::json([
                 'per' => number_format($total->first()->price_per,2),
-                'total'=>round(($total->first()->person_count*$total->first()->price_per*$this->bookingfee),0),
-                'tp' => round(($total->first()->person_count*$total->first()->price_per),0)
+                'total'=>($total->first()->person_count*$total->first()->price_per*$this->bookingfee),
+                'tp' => ($total->first()->person_count*$total->first()->price_per)
             ]);
 
         } elseif($request->paymentoption == 'Full Payment') {

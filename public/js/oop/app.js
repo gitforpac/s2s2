@@ -37,7 +37,8 @@ class Client {
 	{
 		$('#user-profile-form').submit(function(event){
 
-			$('#loading').show();
+			Snackbar.show({ showAction: false,text: '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size: 16px;color:#fff !important;"></i> Creating Updating Profile', pos: 'bottom-right',duration:15000 });
+
 			$('#edit-submit').prop('disabled', true);
 		    event.preventDefault();
 
@@ -60,16 +61,14 @@ class Client {
 
 		    axios.put('/adventurer/'+id, userdata).then(function(response){
 		    	if(response.status===200 && response.statusText === "OK") {
-		    		$('.message-status').show();
-		    		$('.message-status').html('<p class="success"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Successful updating profile</p>')
+		    		Snackbar.show({ showAction: false,text: '<i class="fa fa-check-circle" style="font-size: 16px;color:#8bd395 !important;"></i> Profile updated', pos: 'bottom-right' });
+		    		location.reload();
 		    		$('.message-status').fadeOut(6000);
 		    		$('#edit-submit').prop('disabled', false);
 		    		$('#loading').hide();
 		    	}
 		    }).catch(error => {
-		    	$('.message-status').show();
-		    	$('.message-status').html('<p class="error"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;There was an error updating profile</p>')
-		    	$('.message-status p').fadeOut(6000);
+		    	Snackbar.show({ showAction: false,text: '<i class="fa fa-exclamation-triangle" style="font-size: 16px;color:#fff !important;"></i> There was a problem updating profile', pos: 'bottom-right',duration:5000 });
 		    	$('#edit-submit').prop('disabled', false);
 		    	$('#loading').hide();
 		    });
