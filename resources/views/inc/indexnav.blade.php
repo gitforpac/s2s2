@@ -21,6 +21,8 @@
       <li class="nav-item">
         <a class="nav-link" href="/contact-us">CONTACT</a>
       </li>
+      
+      
       @if(Auth::guard('user')->check())
      <li class="nav-item dropdown" style="margin-left: 650px">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
