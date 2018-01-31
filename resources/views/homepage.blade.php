@@ -43,7 +43,7 @@
         <h1 class="display-4 f">Adventure is worthwhile </h1>
         <marquee direction="left" width="100%" height="100%" id="background" behavior="alternate" style="border:solid">
           <marquee behavior="alternate">
-            <h3>BOK NOW!!!!</h3>
+            <h2>BOoK nOw!!!!</h2>
           </marquee>
         </marquee>
         <audio id="hayaanmosila" autoplay loop>
