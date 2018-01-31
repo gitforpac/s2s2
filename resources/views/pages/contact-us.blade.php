@@ -41,7 +41,7 @@ If you would like us to keep you on file, please email us at cebu@pac.com!</p>
                             <label for="name">
 
                                 Name</label>
-                            <input required type="text" class="form-control" value="{{Auth::guard('user')->user_fullname()}}" />
+                            <input required type="text" class="form-control" value="{{Auth::guard('user')->name()}}" />
                         </div>
                         <div class="form-group">
                             <label for="email">
