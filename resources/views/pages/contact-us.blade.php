@@ -31,11 +31,58 @@ If you would like us to keep you on file, please email us at cebu@pac.com!</p>
       <div class="row">
         <div class="col-md-8">
             <div class="well well-sm">
+               
+
+            @if(Auth::guard('user')->check())
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+
+                                Name</label>
+                            <input required type="text" class="form-control" value="{{Auth::guard('user')->user_fullname()}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-envelope"></span>
+                                </span>
+                                <input required type="email" class="form-control" value="{{Auth::guard('user')->email()}}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">
+                                Subject</label>
+                            <select id="subject" name="subject" class="form-control" required="required">
+                                <option value="na" selected="">Choose One:</option>
+                                <option value="inquiry">Inquiry</option>
+                                <option value="suggestions">Suggestions</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Message</label>
+                            <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn pull-right" style="background-color: #903F39; color: #fff;" onclick="contactus()">
+                            Send Message</button>
+                    </div>
+                </div>
+                </form>
+            @else
                 <form>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">
+
                                 Name</label>
                             <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
                         </div>
@@ -52,9 +99,9 @@ If you would like us to keep you on file, please email us at cebu@pac.com!</p>
                                 Subject</label>
                             <select id="subject" name="subject" class="form-control" required="required">
                                 <option value="na" selected="">Choose One:</option>
-                                <option value="service">Inquiry</option>
+                                <option value="inquiry">Inquiry</option>
                                 <option value="suggestions">Suggestions</option>
-                                <option value="product">Feedback</option>
+                                <option value="feedback">Feedback</option>
                             </select>
                         </div>
                     </div>
@@ -67,11 +114,12 @@ If you would like us to keep you on file, please email us at cebu@pac.com!</p>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn pull-right" style="background-color: #903F39; color: #fff;" id="btnContactUs">
+                        <button type="submit" class="btn pull-right" style="background-color: #903F39; color: #fff;" onclick="contactus()">
                             Send Message</button>
                     </div>
                 </div>
                 </form>
+            @endif
             </div>
         </div>
         <div class="col-md-4">

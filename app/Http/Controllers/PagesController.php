@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ContactUs;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class PagesController extends Controller
 {
@@ -12,11 +15,21 @@ class PagesController extends Controller
     	return view('pages.about-us');
 	}
 
-	public function contactus()
+	public function contactus(Request $request)
     {
-    	return view('pages.contact-us')->with('c',$c);
-    	// $c = ContactUs::find(1)->first();
+        // $this->validate($request, [
+        //         'name' => 'required',
+        //         'email' => 'required|email',
+        //         'message' => 'required'
+        //     ]);
 
-    	// return view('pages.contact-us')->with('c',$c);
-	}
+
+        // ContactUS::create($request->all());
+        // return view('pages.contact-us')->with('c',$c);
+
+        //return back()->with('success', 'Thanks for contacting us!');
+        return view('pages.contact-us')->with('success', 'Thanks for contacting us!');
+    }
+
+
 }
